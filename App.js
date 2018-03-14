@@ -30,24 +30,11 @@ export default class App extends React.Component {
         try {
           const response = await fetch(url);
           const json = await response.json();
-  
-          // console.log(json);
-
-          
-        // const v = json.map((x, i) => {
-        //   let newClass = `segment s-${i}`;
-        //   let temperature = Math.round(x.main.temp - 273.15);
-        //   return x;
-        // });
-
-          // console.log(json);
 
           this.setState({
             weather: json,
             loaded: true
           });
-  
-          // Store.dispatch(populateWeather(json));
         
         } catch(error) {
           console.log('error');
@@ -79,10 +66,10 @@ export default class App extends React.Component {
                         {
                           i === 0 ? 
                             <Text style={styles.sectionText} key={i}>
-                              {temperature}&#176; now
+                              {temperature}&#176; & {x.weather[0].main} right now
                             </Text> :
                             <Text style={styles.sectionText} key={i}>
-                              {temperature}&#176; in {i}hr
+                              {temperature}&#176; in {i * 3}hr
                             </Text>
                         }
                         
@@ -109,12 +96,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: window.width
   },
-  // sphere: {
-  //   backgroundColor: '#83c359',
-  //   width: window.width - 10,
-  //   height: window.width - 10,
-  //   borderRadius: window.width / 2
-  // }
   section: {
     width: window.width,
     paddingLeft: 10,
@@ -126,10 +107,6 @@ const styles = StyleSheet.create({
   },
   sectionLater: {
     backgroundColor: '#c4d24a',
-    flex: 2.5
-  },
-  sectionLatest: {
-    backgroundColor: '#cb9326',
     flex: 2.5
   },
   sectionText: {
