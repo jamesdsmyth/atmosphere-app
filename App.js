@@ -1,6 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View, Dimensions } from 'react-native';
-//import date from './date-and-time';
+import { StyleSheet, Text, View, Image, Dimensions } from 'react-native';
+import SvgUri from 'react-native-svg-uri';
+import SVGImage from 'react-native-svg-image';
 
 export default class App extends React.Component {
 
@@ -80,7 +81,15 @@ export default class App extends React.Component {
                           i === 0 && 
                             <Text style={styles.sectionText}>{city}</Text>
                         }
-                      </View>;
+                <SVGImage
+                style={{ width: 3000, height: 30, backgroundColor: 'transparent' }}
+                source={require('./assets/Rain-thin.svg')}
+                />
+                <SvgUri
+                  width="200"
+                  height="200"
+                  source={require('./assets/Snow.svg')} />
+              </View>;
             }
           })
         }
@@ -122,6 +131,11 @@ const styles = StyleSheet.create({
   sectionLater: {
     backgroundColor: '#c4d24a',
     flex: 2.5
+  },
+  backgroundImage: {
+    width: 100,
+    height: 100,
+    backgroundColor: '#000000'
   },
   section0: {
     backgroundColor: constants.blue
