@@ -1,1 +1,3 @@
-# atmosphere using react native
+# atmosphere
+
+Being built using React Native.
