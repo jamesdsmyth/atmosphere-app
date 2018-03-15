@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, Dimensions } from 'react-native';
+//import date from './date-and-time';
 
 export default class App extends React.Component {
 
@@ -13,8 +14,10 @@ export default class App extends React.Component {
 
   apiCall = () => {
 
-    // using fetch() to get the weatrher data
+    // using fetch() to get the weather data
     navigator.geolocation.getCurrentPosition(position => {
+
+      console.log(position);
   
       let ceilingLat = Math.floor(position.coords.latitude);
       let ceilingLng = Math.floor(position.coords.longitude);
@@ -58,10 +61,11 @@ export default class App extends React.Component {
         {
           weather.map((x, i) => {
             while(i < 3) {
+              const temperature = Math.round(x.main.temp - 273.15);
               const sectionClass = i === 0 ? styles.sectionNow : styles.sectionLater;
-              let temperature = Math.round(x.main.temp - 273.15);
-   
-              return  <View style={[styles.section, sectionClass]} key={i}>
+              const sectionTemperature = styles[`section${temperature}`];
+
+              return  <View style={[styles.section, sectionClass, sectionTemperature]} key={i}>
                         {
                           i === 0 ? 
                             <Text style={styles.sectionText} key={i}>
@@ -86,6 +90,17 @@ export default class App extends React.Component {
 }
 
 const window = Dimensions.get('window');
+const constants = {
+  blue: '#2f358f', // 0 -5
+  lightBlue: '#0a56a2', // 6 - 10
+  lightGreen: '#1aa79d', // 11 - 15
+  green: '#17a456', // 16 - 20
+  yellow: '#fef036', // 21 - 25
+  lightOrange: '#fec42e', // 26 - 30
+  orange: '#fd9326', // 31 - 35
+  darkOrange: '#f16631', // 36 - 40
+  red: '#eb212f', // 41 - 50
+}
 const styles = StyleSheet.create({
   container: {
     flex: 10,
@@ -108,6 +123,121 @@ const styles = StyleSheet.create({
     backgroundColor: '#c4d24a',
     flex: 2.5
   },
+  section0: {
+    backgroundColor: constants.blue
+  },
+  section1: {
+    backgroundColor: constants.blue
+  },
+  section2: {
+    backgroundColor: constants.blue
+  },
+  section3: {
+    backgroundColor: constants.blue
+  },
+  section4: {
+    backgroundColor: constants.blue
+  },
+  section5: {
+    backgroundColor: constants.blue
+  },
+
+  section6: {
+    backgroundColor: constants.lightBlue
+  },
+  section7: {
+    backgroundColor: constants.lightBlue
+  },
+  section8: {
+    backgroundColor: constants.lightBlue
+  },
+  section9: {
+    backgroundColor: constants.lightBlue
+  },
+  section10: {
+    backgroundColor: constants.lightBlue
+  },
+
+  section11: {
+    backgroundColor: constants.lightGreen
+  },
+  section12: {
+    backgroundColor: constants.lightGreen
+  },
+  section13: {
+    backgroundColor: constants.lightGreen
+  },
+  section14: {
+    backgroundColor: constants.lightGreen
+  },
+  section15: {
+    backgroundColor: constants.lightGreen
+  },
+
+  section16: {
+    backgroundColor: constants.green
+  },
+  section17: {
+    backgroundColor: constants.green
+  },
+  section18: {
+    backgroundColor: constants.green
+  },
+  section19: {
+    backgroundColor: constants.green
+  },
+  section20: {
+    backgroundColor: constants.green
+  },
+
+  section21: {
+    backgroundColor: constants.yellow
+  },
+  section22: {
+    backgroundColor: constants.yellow
+  },
+  section23: {
+    backgroundColor: constants.yellow
+  },
+  section24: {
+    backgroundColor: constants.yellow
+  },
+  section25: {
+    backgroundColor: constants.yellow
+  },
+
+  section26: {
+    backgroundColor: constants.lightOrange
+  },
+  section27: {
+    backgroundColor: constants.lightOrange
+  },
+  section28: {
+    backgroundColor: constants.lightOrange
+  },
+  section29: {
+    backgroundColor: constants.lightOrange
+  },
+  section30: {
+    backgroundColor: constants.lightOrange
+  },
+
+  section31: {
+    backgroundColor: constants.orange
+  },
+  section32: {
+    backgroundColor: constants.orange
+  },
+  section33: {
+    backgroundColor: constants.orange
+  },
+  section34: {
+    backgroundColor: constants.orange
+  },
+  section35: {
+    backgroundColor: constants.orange
+  },
+
   sectionText: {
     fontSize: 20,
     color: '#ffffff'
