@@ -30,15 +30,14 @@ export default class App extends React.Component {
         try {
           const response = await fetch(url);
           const json = await response.json();
+          console.log(url);
 
           this.setState({
             weather: json,
             loaded: true
           });
         
-        } catch(error) {
-          console.log('error');
-        }
+        } catch(error) {}
       }
   
       apiRequest();
@@ -66,10 +65,10 @@ export default class App extends React.Component {
                         {
                           i === 0 ? 
                             <Text style={styles.sectionText} key={i}>
-                              {temperature}&#176; & {x.weather[0].main} right now
+                              {temperature}&#176; & {x.weather[0].main.toLowerCase()} right now
                             </Text> :
                             <Text style={styles.sectionText} key={i}>
-                              {temperature}&#176; in {i * 3}hr
+                              {temperature}&#176; at {x.dt_txt}
                             </Text>
                         }
                         
