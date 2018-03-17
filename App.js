@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, Dimensions } from 'react-native';
 import SvgUri from 'react-native-svg-uri';
+//import WeatherSvg from './components/WeatherSvg';
 
 export default class App extends React.Component {
 
@@ -70,13 +71,8 @@ export default class App extends React.Component {
                           i === 0 ?
                           <View style={[styles.sectionInner]} key={i}>
                             <Text style={styles.sectionText} key={i}>
-                              {temperature}&#176; and {x.weather[0].main.toLowerCase()} right now
+                              {temperature}&#176; with {x.weather[0].main.toLowerCase()} right now
                             </Text>
-                            {/* <SvgUri
-                            width="60"
-                            height="60"
-                            source={require('./assets/sun.svg')}
-                            />  */}
                             </View>:
                             <Text style={styles.sectionText} key={i}>
                               {temperature}&#176; at {strippedTime}
