@@ -68,15 +68,15 @@ export default class App extends React.Component {
               return  <View style={[styles.section, sectionClass, sectionTemperature]} key={i}>
                         {
                           i === 0 ?
-                          <View>
+                          <View style={[styles.sectionInner]} key={i}>
                             <Text style={styles.sectionText} key={i}>
                               {temperature}&#176; and {x.weather[0].main.toLowerCase()} right now
                             </Text>
-                            <SvgUri
-                            width="200"
-                            height="200"
+                            {/* <SvgUri
+                            width="60"
+                            height="60"
                             source={require('./assets/sun.svg')}
-                            /> 
+                            />  */}
                             </View>:
                             <Text style={styles.sectionText} key={i}>
                               {temperature}&#176; at {strippedTime}
@@ -115,9 +115,14 @@ const styles = StyleSheet.create({
   section: {
     width: window.width,
     paddingLeft: 10,
+    paddingRight: 10,
     justifyContent: 'center',
     borderTopWidth: 1,
     borderColor: '#fff'
+  },
+  sectionInner: {
+    flexDirection: 'row',
+    justifyContent: 'space-between'
   },
   sectionNow: {
     backgroundColor: '#83c359',
@@ -250,6 +255,6 @@ const styles = StyleSheet.create({
 
   sectionText: {
     fontSize: 20,
-    color: '#ffffff'
+    color: '#ffffff',
   }
 });
