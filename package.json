@@ -4,6 +4,8 @@
   "dependencies": {
     "date-and-time": "^0.6.2",
     "expo": "^25.0.0",
+    "hh-mm-ss": "^1.2.0",
+    "moment": "^2.21.0",
     "react": "16.2.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-25.0.0.tar.gz",
     "react-native-svg-image": "^2.0.1",
