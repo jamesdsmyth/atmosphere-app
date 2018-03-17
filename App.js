@@ -1,6 +1,5 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, Dimensions } from 'react-native';
-import moment from 'moment';
 
 export default class App extends React.Component {
 
@@ -17,8 +16,6 @@ export default class App extends React.Component {
     // using fetch() to get the weather data
     navigator.geolocation.getCurrentPosition(position => {
 
-      // console.log(position);
-  
       let ceilingLat = Math.floor(position.coords.latitude);
       let ceilingLng = Math.floor(position.coords.longitude);
       let url = `http://api.openweathermap.org/data/2.5/forecast?lat=${ceilingLat}&lon=${ceilingLng},&mode=json&appid=fb161b8bdfd1a946ed269b0b2cf42b77`;
@@ -60,16 +57,12 @@ export default class App extends React.Component {
       <View style={styles.container}>
         {
           weather.map((x, i) => {
-            while(i < 3) {
+            while(i < 6) {
               const temperature = Math.round(x.main.temp - 273.15);
               const sectionClass = i === 0 ? styles.sectionNow : styles.sectionLater;
               const sectionTemperature = styles[`section${temperature}`];
               const timeArray = x.dt_txt.split('');
-              console.log(timeArray);
               const strippedTime = timeArray.slice(timeArray.length - 8, timeArray.length - 3);
-
-              
-
 
               return  <View style={[styles.section, sectionClass, sectionTemperature]} key={i}>
                         {
@@ -80,11 +73,6 @@ export default class App extends React.Component {
                             <Text style={styles.sectionText} key={i}>
                               {temperature}&#176; at {strippedTime}
                             </Text>
-                        }
-                        
-                        {
-                          i === 0 && 
-                            <Text style={styles.sectionText}>{city}</Text>
                         }
               </View>;
             }
@@ -119,15 +107,18 @@ const styles = StyleSheet.create({
   section: {
     width: window.width,
     paddingLeft: 10,
-    justifyContent: 'center'
+    justifyContent: 'center',
+    borderTopWidth: 1,
+    borderColor: '#fff'
   },
   sectionNow: {
     backgroundColor: '#83c359',
-    flex: 5
+    flex: 5,
+    borderTopWidth: 0
   },
   sectionLater: {
     backgroundColor: '#c4d24a',
-    flex: 2.5
+    flex: 1
   },
   backgroundImage: {
     width: 100,
