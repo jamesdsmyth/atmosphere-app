@@ -2,8 +2,6 @@ import React from 'react';
 import { StyleSheet, Text, View, Image, Dimensions } from 'react-native';
 import moment from 'moment';
 
-console.log(moment(1521269926032.4868).format("dddd, MMMM Do YYYY, h:mm:ss a"));
-
 export default class App extends React.Component {
 
   constructor() {
@@ -66,6 +64,12 @@ export default class App extends React.Component {
               const temperature = Math.round(x.main.temp - 273.15);
               const sectionClass = i === 0 ? styles.sectionNow : styles.sectionLater;
               const sectionTemperature = styles[`section${temperature}`];
+              const timeArray = x.dt_txt.split('');
+              console.log(timeArray);
+              const strippedTime = timeArray.slice(timeArray.length - 8, timeArray.length - 3);
+
+              
+
 
               return  <View style={[styles.section, sectionClass, sectionTemperature]} key={i}>
                         {
@@ -74,7 +78,7 @@ export default class App extends React.Component {
                               {temperature}&#176; & {x.weather[0].main.toLowerCase()} right now
                             </Text> :
                             <Text style={styles.sectionText} key={i}>
-                              {temperature}&#176; at {x.dt_txt}
+                              {temperature}&#176; at {strippedTime}
                             </Text>
                         }
                         
