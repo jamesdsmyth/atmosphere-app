@@ -2,36 +2,44 @@ import React from 'react';
 import { StyleSheet, Text, View, Image, Dimensions } from 'react-native';
 import SvgUri from 'react-native-svg-uri';
 
-const WeatherSvg = ({ weatherType }) => {
+const WeatherSvg = (props) => {
 
-  const weatherType = weatherType.toLowerCase();
+  const weatherTypeLower = props.weatherType.toLowerCase();
   const path = '../assets/';
-  let uri;
+  let uri = '';
 
-  switch(weatherType) {
+  console.log(weatherTypeLower)
+
+  switch(weatherTypeLower) {
     case 'rain':
-      uri = `${path}rain.svg`;
+      uri = 'sun';
+      break;
+
+    case 'clouds':
+      uri = require(`../assets/cloud.svg`);
       break;
 
     case 'sun':
-      uri = `${path}sun.svg`;
-      break;
-
-    case 'sun':
-      uri = `${path}clouds.svg`;
+      uri = require(`../assets/sun.svg`);
       break;
 
     case 'clear':
-      uri = `${path}sun.svg`;
+      uri = require(`../assets/sun.svg`);
+      break;
+
+    default:
+      uri = require(`../assets/sun.svg`);
       break;
   }
 
   return (
+    <View>
     <SvgUri
       width="60"
       height="60"
-      source={require(uri)}
-    /> 
+      source={uri}
+    />
+    </View>
   )
 }
 
