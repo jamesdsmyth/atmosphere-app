@@ -92,12 +92,13 @@ const constants = {
   blue: '#2f358f', // 0 -5
   lightBlue: '#0a56a2', // 6 - 10
   lightGreen: '#1aa79d', // 11 - 15
-  green: '#83c359', // 16 - 20
+  green: '#c9da55', // 16 - 20
   yellow: '#fef036', // 21 - 25
   lightOrange: '#fec42e', // 26 - 30
   orange: '#fd9326', // 31 - 35
   darkOrange: '#f16631', // 36 - 40
-  red: '#eb212f', // 41 - 50
+  red: '#eb212f', // 41 - 50,
+  white: '#ffffff'
 }
 const styles = StyleSheet.create({
   container: {
@@ -132,7 +133,7 @@ const styles = StyleSheet.create({
   backgroundImage: {
     width: 100,
     height: 100,
-    backgroundColor: '#000000'
+    backgroundColor: constants.white
   },
   section0: {
     backgroundColor: constants.blue
@@ -251,6 +252,6 @@ const styles = StyleSheet.create({
 
   sectionText: {
     fontSize: 20,
-    color: '#ffffff',
+    color: constants.white
   }
 });
