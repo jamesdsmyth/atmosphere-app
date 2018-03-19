@@ -75,7 +75,7 @@ export default class App extends React.Component {
                             </Text>
                             <WeatherSvg weatherType={x.weather[0].main} />
                           </View>:
-                          <View>
+                          <View style={[styles.sectionInner]} key={i}>
                             <Text style={styles.sectionText} key={i}>
                               {temperature}&#176; at {strippedTime}
                             </Text>
@@ -256,6 +256,7 @@ const styles = StyleSheet.create({
 
   sectionText: {
     fontSize: 20,
-    color: constants.white
+    color: constants.white,
+    lineHeight: 60
   }
 });
