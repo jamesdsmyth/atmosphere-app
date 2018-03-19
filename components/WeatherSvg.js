@@ -12,7 +12,7 @@ const WeatherSvg = (props) => {
 
   switch(weatherTypeLower) {
     case 'rain':
-    uri = require(`../assets/rain.svg`);
+      uri = require(`../assets/rain.svg`);
       break;
 
     case 'clouds':
@@ -35,8 +35,8 @@ const WeatherSvg = (props) => {
   return (
     <View>
     <SvgUri
-      width="60"
-      height="60"
+      width="50"
+      height="50"
       source={uri}
     />
     </View>
