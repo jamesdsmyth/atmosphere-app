@@ -72,13 +72,13 @@ export default class App extends React.Component {
                           i === 0 ?
                           <View style={[styles.sectionInner]} key={i}>
                             <Text style={styles.sectionText} key={i}>
-                              {temperature}&#176; with {x.weather[0].main.toLowerCase()} right now
+                              {temperature}&#176;c with {x.weather[0].main.toLowerCase()} right now
                             </Text>
                             <WeatherSvg weatherType={x.weather[0].main} />
                           </View>:
                           <View style={[styles.sectionInner]} key={i}>
                             <Text style={styles.sectionText} key={i}>
-                              {temperature}&#176; at {strippedTime}
+                              {temperature}&#176;c at {strippedTime}
                             </Text>
                             <WeatherSvg weatherType={x.weather[0].main} />
                           </View>
