@@ -1,0 +1,3 @@
+- Update colors
+- Night time if clear will show a moon
+- User chooses whether they like the color or not using Firebase
