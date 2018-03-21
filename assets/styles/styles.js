@@ -3,6 +3,7 @@ import { StyleSheet, Dimensions } from 'react-native';
 
 const window = Dimensions.get('window');
 const constants = {
+  purple: '#5d2497', // -10 - -1
   blue: '#2f358f', // 0 -5
   lightBlue: '#0a56a2', // 6 - 10
   lightGreen: '#1aa79d', // 11 - 15
@@ -49,6 +50,38 @@ const styles = StyleSheet.create({
     height: 100,
     backgroundColor: constants.white
   },
+
+  section90: {
+    backgroundColor: constants.purple
+  },
+  section91: {
+    backgroundColor: constants.purple
+  },
+  section92: {
+    backgroundColor: constants.purple
+  },
+  section93: {
+    backgroundColor: constants.purple
+  },
+  section94: {
+    backgroundColor: constants.purple
+  },
+  section95: {
+    backgroundColor: constants.purple
+  },
+  section96: {
+    backgroundColor: constants.purple
+  },
+  section97: {
+    backgroundColor: constants.purple
+  },
+  section98: {
+    backgroundColor: constants.purple
+  },
+  section99: {
+    backgroundColor: constants.purple
+  },
+  
   section0: {
     backgroundColor: constants.blue
   },
