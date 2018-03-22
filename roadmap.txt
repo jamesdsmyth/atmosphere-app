@@ -1,3 +1,4 @@
-- Update colors
-- Night time if clear will show a moon
-- User chooses whether they like the color or not using Firebase
+- update colors
+- auto fresh every 30 minutes
+- night time if clear will show a moon
+- user chooses whether they like the color or not using Firebase
