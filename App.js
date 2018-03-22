@@ -10,7 +10,8 @@ export default class App extends React.Component {
     super();
     this.state = {
       weather: null,
-      loaded: false
+      loaded: false,
+      loadingFailed: false
     }
   }
 
@@ -39,7 +40,11 @@ export default class App extends React.Component {
             loaded: true
           });
         
-        } catch(error) {}
+        } catch(error) {
+          this.setState({
+            loadingFailed: true
+          });
+        }
       }
   
       apiRequest();
@@ -55,43 +60,52 @@ export default class App extends React.Component {
     const city = this.state.weather !== null ? this.state.weather.city.name : 'City';
     const weather = this.state.weather !== null ? this.state.weather.list: [];
 
-    return (
-      <View style={styles.container}>
-        {
-          weather.length === 0 && <Text style={styles.loadingText}>Loading your climate...</Text>
-        }
-        
-        {
-          weather.map((x, i) => {
-            while(i < 6) {
-              const temperature = Math.round(x.main.temp - 273.15);
-              const sectionClass = i === 0 ? styles.sectionNow : styles.sectionLater;
-              const updatedTemperature = temperature < 0 ? temperature + 100 : temperature;
-              const sectionTemperature = styles[`section${updatedTemperature}`];
-              const timeArray = x.dt_txt.split('');
-              const strippedTime = timeArray.slice(timeArray.length - 8, timeArray.length - 3);
-
-              return  <View style={[styles.section, sectionClass, sectionTemperature]} key={i}>
-                        {
-                          i === 0 ?
-                          <View style={[styles.sectionInner]} key={i}>
-                            <Text style={styles.sectionText} key={i}>
-                              {temperature}&#176;c and {x.weather[0].main.toLowerCase()} right now
-                            </Text>
-                            <WeatherSvg weatherType={x.weather[0].main} />
-                          </View>:
-                          <View style={[styles.sectionInner]} key={i}>
-                            <Text style={styles.sectionText} key={i}>
-                              {temperature}&#176;c at {strippedTime}
-                            </Text>
-                            <WeatherSvg weatherType={x.weather[0].main} />
-                          </View>
-                        }
-              </View>;
-            }
-          })
-        }
-      </View>
-    );
+    if(this.state.loadingFailed) {
+      return (
+        <View style={styles.container}>
+          <Text style={styles.warningText}>Failed to load climate!</Text>
+          <Text style={styles.warningText}>Please check your connection</Text>
+        </View>
+      )
+    } else {
+      return (
+        <View style={styles.container}>
+          {
+            weather.length === 0 && <Text style={styles.loadingText}>Loading your climate...</Text>
+          }
+          
+          {
+            weather.map((x, i) => {
+              while(i < 6) {
+                const temperature = Math.round(x.main.temp - 273.15);
+                const sectionClass = i === 0 ? styles.sectionNow : styles.sectionLater;
+                const updatedTemperature = temperature < 0 ? temperature + 100 : temperature;
+                const sectionTemperature = styles[`section${updatedTemperature}`];
+                const timeArray = x.dt_txt.split('');
+                const strippedTime = timeArray.slice(timeArray.length - 8, timeArray.length - 3);
+  
+                return  <View style={[styles.section, sectionClass, sectionTemperature]} key={i}>
+                          {
+                            i === 0 ?
+                            <View style={[styles.sectionInner]} key={i}>
+                              <Text style={styles.sectionText} key={i}>
+                                {temperature}&#176;c and {x.weather[0].main.toLowerCase()} right now
+                              </Text>
+                              <WeatherSvg weatherType={x.weather[0].main} />
+                            </View>:
+                            <View style={[styles.sectionInner]} key={i}>
+                              <Text style={styles.sectionText} key={i}>
+                                {temperature}&#176;c at {strippedTime}
+                              </Text>
+                              <WeatherSvg weatherType={x.weather[0].main} />
+                            </View>
+                          }
+                </View>;
+              }
+            })
+          }
+        </View>
+      )
+    }
   }
 }

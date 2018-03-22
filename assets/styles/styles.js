@@ -256,6 +256,10 @@ const styles = StyleSheet.create({
   loadingText: {
     fontSize: 20,
     color: constants.lightGreen
+  },
+  warningText: {
+    fontSize: 20,
+    color: constants.red
   }
 });
 
