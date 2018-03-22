@@ -248,11 +248,14 @@ const styles = StyleSheet.create({
     backgroundColor: constants.red
   },
   
-
   sectionText: {
     fontSize: 20,
     color: constants.white,
     lineHeight: 50
+  },
+  loadingText: {
+    fontSize: 20,
+    color: constants.lightGreen
   }
 });
 

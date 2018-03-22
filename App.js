@@ -58,6 +58,10 @@ export default class App extends React.Component {
     return (
       <View style={styles.container}>
         {
+          weather.length === 0 && <Text style={styles.loadingText}>Loading your climate...</Text>
+        }
+        
+        {
           weather.map((x, i) => {
             while(i < 6) {
               const temperature = Math.round(x.main.temp - 273.15);

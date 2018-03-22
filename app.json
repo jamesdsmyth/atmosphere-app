@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "atmosphere-app",
+    "name": "climate",
     "description": "This project is really great.",
-    "slug": "atmosphere-app",
+    "slug": "climate",
     "privacy": "public",
     "sdkVersion": "25.0.0",
     "platforms": ["ios", "android"],
@@ -16,7 +16,7 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.eiger.atmosphere"
+      "bundleIdentifier": "com.eiger.climate"
     }
   }
 }
