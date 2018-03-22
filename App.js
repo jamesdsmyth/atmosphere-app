@@ -19,8 +19,8 @@ export default class App extends React.Component {
     // using fetch() to get the weather data
     navigator.geolocation.getCurrentPosition(position => {
 
-      const ceilingLat = Math.floor(41.4630566);
-      const ceilingLng = Math.floor(-2.96497169);
+      const ceilingLat = Math.floor(position.coords.latitude);
+      const ceilingLng = Math.floor(position.coords.longitude);
       const url = `http://api.openweathermap.org/data/2.5/forecast?lat=${ceilingLat}&lon=${ceilingLng},&mode=json&appid=fb161b8bdfd1a946ed269b0b2cf42b77`;
   
   
