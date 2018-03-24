@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "climate",
-    "description": "This project is really great.",
+    "description": "Weather where you are, visualised with colours.",
     "slug": "climate",
     "privacy": "public",
     "sdkVersion": "25.0.0",
@@ -16,7 +16,7 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.eiger.climate"
+      "bundleIdentifier": "com.eiger.atmosphere"
     }
   }
 }

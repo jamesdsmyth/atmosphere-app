@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, Dimensions } from 'react-native';
+import { Text, View, ScrollView, RefreshControl, Dimensions } from 'react-native';
 import styles from './assets/styles/styles';
 import SvgUri from 'react-native-svg-uri';
 import WeatherSvg from './components/WeatherSvg';
@@ -11,7 +11,8 @@ export default class App extends React.Component {
     this.state = {
       weather: null,
       loaded: false,
-      loadingFailed: false
+      loadingFailed: false,
+      refreshing: false
     }
   }
 
@@ -51,6 +52,12 @@ export default class App extends React.Component {
     });
   }
 
+  _onRefresh() {
+    this.setState({
+      loaded: false
+    });
+  }
+
   render() {
 
     if(!this.state.loaded) {
@@ -62,14 +69,21 @@ export default class App extends React.Component {
 
     if(this.state.loadingFailed) {
       return (
-        <View style={styles.container}>
+        <ScrollView contentContainerStyle={styles.container}>
           <Text style={styles.warningText}>Failed to load climate!</Text>
           <Text style={styles.warningText}>Please check your connection</Text>
-        </View>
+        </ScrollView>
       )
     } else {
       return (
-        <View style={styles.container}>
+        <ScrollView 
+          refreshControl={
+            <RefreshControl
+              refreshing={this.state.refreshing}
+              onRefresh={this._onRefresh.bind(this)}
+            />
+          }
+        contentContainerStyle={styles.container}>      
           {
             weather.length === 0 && <Text style={styles.loadingText}>Loading your climate...</Text>
           }
@@ -100,11 +114,11 @@ export default class App extends React.Component {
                               <WeatherSvg weatherType={x.weather[0].main} />
                             </View>
                           }
-                </View>;
+                        </View>;
               }
             })
           }
-        </View>
+        </ScrollView>
       )
     }
   }
