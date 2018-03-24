@@ -24,7 +24,7 @@ export default class App extends React.Component {
       const ceilingLat = Math.floor(position.coords.latitude);
       const ceilingLng = Math.floor(position.coords.longitude);
       const url = `http://api.openweathermap.org/data/2.5/forecast?lat=${ceilingLat}&lon=${ceilingLng},&mode=json&appid=fb161b8bdfd1a946ed269b0b2cf42b77`;
-  
+      console.log(new Date());
   
       // using async to wrap the await methods.
       // we call apiRequest async function, within this we use the fetch api
@@ -52,7 +52,9 @@ export default class App extends React.Component {
     });
   }
 
-  _onRefresh() {
+  // pulling the screen down will refresh the app
+  // setting loaded to false will rerender the view and call the weather API again
+  refreshView() {
     this.setState({
       loaded: false
     });
@@ -80,7 +82,7 @@ export default class App extends React.Component {
           refreshControl={
             <RefreshControl
               refreshing={this.state.refreshing}
-              onRefresh={this._onRefresh.bind(this)}
+              onRefresh={this.refreshView.bind(this)}
             />
           }
         contentContainerStyle={styles.container}>      

@@ -8,8 +8,6 @@ const WeatherSvg = (props) => {
   const path = '../assets/';
   let uri = '';
 
-  console.log(weatherTypeLower)
-
   switch(weatherTypeLower) {
     case 'rain':
       uri = require(`../assets/rain.svg`);
