@@ -16,7 +16,7 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.eiger.atmosphere"
+      "bundleIdentifier": "com.eiger.climate"
     }
   }
 }
