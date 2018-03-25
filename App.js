@@ -1,8 +1,8 @@
 import React from 'react';
 import { Text, View, ScrollView, RefreshControl, Dimensions } from 'react-native';
-import styles from './assets/styles/styles';
 import SvgUri from 'react-native-svg-uri';
 import WeatherSvg from './components/WeatherSvg';
+import styles from './assets/styles/styles';
 
 export default class App extends React.Component {
 

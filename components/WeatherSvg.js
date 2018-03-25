@@ -1,6 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, Dimensions } from 'react-native';
+import { View } from 'react-native';
 import SvgUri from 'react-native-svg-uri';
+import styles from '../assets/styles/styles';
 
 const WeatherSvg = (props) => {
 
@@ -36,6 +37,7 @@ const WeatherSvg = (props) => {
       width="50"
       height="50"
       source={uri}
+      fill="#ffffff"
     />
     </View>
   )
