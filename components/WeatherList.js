@@ -29,7 +29,10 @@ const WeatherList = ( { weather, onRefresh } ) => (
                 const timeArray = x.dt_txt.split('');
                 const strippedTime = timeArray.slice(timeArray.length - 8, timeArray.length - 3);
   
-                return  <View style={[styles.section, sectionClass, sectionTemperature]} key={i}>
+                return  <View 
+                          style={[styles.section, sectionClass, sectionTemperature]} 
+                          key={i}
+                        >
                           {
                             i === 0 ?
                             <View style={[styles.sectionInner]} key={i}>

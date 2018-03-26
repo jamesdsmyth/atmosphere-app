@@ -5,6 +5,9 @@ import WeatherSvg from './components/WeatherSvg';
 import styles from './assets/styles/styles';
 import WeatherList from './components/WeatherList';
 
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+
 export default class App extends React.Component {
 
   constructor() {
