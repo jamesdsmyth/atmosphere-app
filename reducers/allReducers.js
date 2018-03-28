@@ -1,8 +1,18 @@
-import { combineReducers } from 'redux';
-import weather from './weather';
+import { createStore, applyMiddleware, compose } from "redux";
+import createSagaMiddleware from "redux-saga";
 
-const climate = combineReducers({
-  weather
-});
+import { watcherSaga } from "./sagas";
+import { weather } from './weather';
 
-export default climate;
+// create the saga middleware
+const sagaMiddleware = createSagaMiddleware();
+
+let store = createStore(
+  weather,
+  applyMiddleware(sagaMiddleware)
+)
+
+// run the saga
+sagaMiddleware.run(watcherSaga);
+
+export default store;

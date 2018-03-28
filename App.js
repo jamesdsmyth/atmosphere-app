@@ -1,12 +1,11 @@
 import React from 'react';
-import { Text, View, ScrollView, RefreshControl, Dimensions } from 'react-native';
-import SvgUri from 'react-native-svg-uri';
-import WeatherSvg from './components/WeatherSvg';
+import { Text, View, ScrollView } from 'react-native';
+import { Provider } from 'react-redux';
+
 import styles from './assets/styles/styles';
 import WeatherList from './components/WeatherList';
 
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import store from './reducers/allReducers';
 
 export default class App extends React.Component {
 
@@ -28,7 +27,7 @@ export default class App extends React.Component {
       const ceilingLat = Math.floor(position.coords.latitude);
       const ceilingLng = Math.floor(position.coords.longitude);
       const url = `http://api.openweathermap.org/data/2.5/forecast?lat=${ceilingLat}&lon=${ceilingLng},&mode=json&appid=fb161b8bdfd1a946ed269b0b2cf42b77`;
-      console.log(new Date());
+      console.log('new date is', new Date());
   
       // using async to wrap the await methods.
       // we call apiRequest async function, within this we use the fetch api
@@ -66,6 +65,8 @@ export default class App extends React.Component {
 
   render() {
 
+    console.log('rendering!!!!');
+
     if(!this.state.loaded) {
       this.apiCall();
     }
@@ -82,10 +83,13 @@ export default class App extends React.Component {
       )
     } else {
       return (
-        <WeatherList 
-          weather={weather}
-          onRefresh={() => this.refreshView()}
-        />
+        <Provider store={store}>
+          {/* <WeatherList 
+            weather={weather}
+            onRefresh={() => this.refreshView()}
+          /> */}
+          <WeatherList />
+        </Provider>
       )
     }
   }
