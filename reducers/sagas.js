@@ -6,22 +6,23 @@ export function* watcherSaga() {
 
 function callWeatherAPI() {
 
-// using fetch() to get the weather data
-return navigator.geolocation.getCurrentPosition(position => {
+  // using fetch() to get the weather data
+  return navigator.geolocation.getCurrentPosition(position => {
 
-  const ceilingLat = Math.floor(position.coords.latitude);
-  const ceilingLng = Math.floor(position.coords.longitude);
-  const url = `http://api.openweathermap.org/data/2.5/forecast?lat=${ceilingLat}&lon=${ceilingLng},&mode=json&appid=fb161b8bdfd1a946ed269b0b2cf42b77`;
-  
-  return fetch(url).then(response => {
-    return response;
-  }).catch(error => {
-    return { error: true}
+    const ceilingLat = Math.floor(position.coords.latitude);
+    const ceilingLng = Math.floor(position.coords.longitude);
+    const url = `http://api.openweathermap.org/data/2.5/forecast?lat=${ceilingLat}&lon=${ceilingLng},&mode=json&appid=fb161b8bdfd1a946ed269b0b2cf42b77`;
+    
+    console.log('calling the weather api');
+    const apiCall = fetch(url).then(response => {
+      const dataHere = response;
+      return dataHere;
+    }).catch(error => {
+      return { error: true }
+    });
+
+    return apiCall;
   });
-});
-
-
-  
 }
 
 function* workerSaga() {
@@ -31,7 +32,7 @@ function* workerSaga() {
 
     console.log('server response', response)
 
-    yield put({ type: 'API_CALL_SUCCESS', response });
+    yield put({ type: 'API_CALL_SUCCESS', data: response });
   
   } catch(error) {
 
