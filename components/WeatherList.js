@@ -25,13 +25,19 @@ class WeatherList extends Component {
     });
   }
 
+  componentDidMount() {
+    this.props.onRequestWeather();
+  }
+
   render() {
 
-    const { weather } = this.props;
+    const { weather, onRequestWeather } = this.props;
 
-    console.log('the weathrerrrrrr', weather);
+    console.log('INSIDE WEATHERLIST ', weather);
+
     return (
       <Text>HIII</Text>
+      
         // <ScrollView 
         //   refreshControl={
         //     <RefreshControl
@@ -90,4 +96,10 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(WeatherList);
+const mapDispatchToProps = dispatch => {
+  return {
+    onRequestWeather: () => dispatch({ type: "API_CALL_REQUEST" })
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(WeatherList);

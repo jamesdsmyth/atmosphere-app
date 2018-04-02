@@ -1,16 +1,20 @@
 import * as types from '../constants/actionTypes';
 
-export const weather = (state = {name: 'jamessss'}, action) => {
-  switch(action.type) {
-    // case types.ADD_WEATHER:
+export function weather(state = {}, action) {
+
+
+
+  console.log('INSIDE THE FUCKING REDUCER', state, action);
+  switch (action.type) {
+    case 'API_CALL_REQUEST':
+      return { ...state, fetching: true, error: null };
+      break;
     case 'API_CALL_SUCCESS':
-      console.log('success in request');
-      return Object.assign({}, state, action.data);
-
-    case 'API_CALL_ERROR':
-      console.log('error in request');
-      return state;
-
+      return { ...state, fetching: false, weather: action };
+      break;
+    case 'API_CALL_FAILURE':
+      return { ...state, fetching: false, dog: null, error: action.error };
+      break;
     default:
       return state;
   }

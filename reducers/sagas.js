@@ -5,18 +5,38 @@ export function* watcherSaga() {
 }
 
 function callWeatherAPI() {
-  const response = fetch('https://dog.ceo/api/breeds/image/random');
-  return response;
+
+// using fetch() to get the weather data
+return navigator.geolocation.getCurrentPosition(position => {
+
+  const ceilingLat = Math.floor(position.coords.latitude);
+  const ceilingLng = Math.floor(position.coords.longitude);
+  const url = `http://api.openweathermap.org/data/2.5/forecast?lat=${ceilingLat}&lon=${ceilingLng},&mode=json&appid=fb161b8bdfd1a946ed269b0b2cf42b77`;
+  
+  return fetch(url).then(response => {
+    return response;
+  }).catch(error => {
+    return { error: true}
+  });
+});
+
+
+  
 }
 
 function* workerSaga() {
+
   try {
     const response = yield call(callWeatherAPI);
-    const dog = response.data.message;
 
-    yield put({ type: 'API_CALL_SUCCESS', dog });
+    console.log('server response', response)
+
+    yield put({ type: 'API_CALL_SUCCESS', response });
+  
   } catch(error) {
-    
+
+    console.log('the error is', error);
+
     yield put({ type: "API_CALL_FAILURE", error });
   }
 }
