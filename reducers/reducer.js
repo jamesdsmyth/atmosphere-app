@@ -1,10 +1,7 @@
 import * as types from '../constants/actionTypes';
 
-export function weather(state = {}, action) {
+export function reducer(state = {}, action) {
 
-
-
-  console.log('INSIDE THE FUCKING REDUCER', state, action);
   switch (action.type) {
     case 'API_CALL_REQUEST':
       return { ...state, fetching: true, error: null };

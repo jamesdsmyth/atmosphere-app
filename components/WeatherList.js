@@ -33,8 +33,6 @@ class WeatherList extends Component {
 
     const { weather, onRequestWeather } = this.props;
 
-    console.log('INSIDE WEATHERLIST ', weather);
-
     return (
       <Text>HIII</Text>
       

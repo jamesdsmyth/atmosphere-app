@@ -1,43 +1,35 @@
-import { takeLatest, call, put } from 'redux-saga/effects';
+import { takeEvery, call, all, put } from 'redux-saga/effects';
+import axios from 'axios';
 
-export function* watcherSaga() {
-  yield takeLatest('API_CALL_REQUEST', workerSaga);
-}
-
-function callWeatherAPI() {
-
-  // using fetch() to get the weather data
-  return navigator.geolocation.getCurrentPosition(position => {
-
-    const ceilingLat = Math.floor(position.coords.latitude);
-    const ceilingLng = Math.floor(position.coords.longitude);
-    const url = `http://api.openweathermap.org/data/2.5/forecast?lat=${ceilingLat}&lon=${ceilingLng},&mode=json&appid=fb161b8bdfd1a946ed269b0b2cf42b77`;
-    
-    console.log('calling the weather api');
-    const apiCall = fetch(url).then(response => {
-      const dataHere = response;
-      return dataHere;
-    }).catch(error => {
-      return { error: true }
-    });
-
-    return apiCall;
-  });
-}
-
-function* workerSaga() {
+// our worker saga
+export function* createLessonAsync() {
 
   try {
-    const response = yield call(callWeatherAPI);
+    // trying to call our api
+    // const ceilingLat = Math.floor(position.coords.latitude);
+    // const ceilingLng = Math.floor(position.coords.longitude);
+    // const url = `http://api.openweathermap.org/data/2.5/forecast?lat=${ceilingLat}&lon=${ceilingLng},&mode=json&appid=fb161b8bdfd1a946ed269b0b2cf42b77`;  
+    
+    const url = 'https://jsonplaceholder.typicode.com/users'
 
-    console.log('server response', response)
-
-    yield put({ type: 'API_CALL_SUCCESS', data: response });
-  
+    // axios will take 2 or 3 arguments. the method (axios.get/axios.post, url, arguments);
+    const response = yield call(axios.get, url);
+    console.log(response);
   } catch(error) {
-
-    console.log('the error is', error);
-
-    yield put({ type: "API_CALL_FAILURE", error });
+    // throwing an error from our api
+    console.log('request failed', error);
   }
+}
+
+// our watcher saga
+export function* watchCreateLesson() {
+  console.log('redux saga is running the createLesson action listener');
+  yield takeEvery('API_CALL_REQUEST', createLessonAsync);
+}
+
+// single entry point to start all our sagas at once
+export default function* rootSaga() {
+  yield all([
+    watchCreateLesson()
+  ])
 }
