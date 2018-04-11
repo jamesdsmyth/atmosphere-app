@@ -4,15 +4,33 @@ export function reducer(state = {}, action) {
 
   switch (action.type) {
     case 'API_CALL_REQUEST':
-      return { ...state, fetching: true, error: null };
+      return { 
+        ...state, 
+        fetching: true, 
+        error: false,
+        weather: false
+      }
+
       break;
       
     case 'API_CALL_SUCCESS':
-      return { ...state, fetching: false, error: null, weather: action.response };
+      return { 
+        ...state, 
+        fetching: false, 
+        error: false,
+        weather: action.response
+      }
+
       break;
 
-    case 'API_CALL_FAILURE':
-      return { ...state, fetching: false, error: action.error };
+    case 'API_CALL_ERROR':
+      return { 
+        ...state, 
+        fetching: false, 
+        error: true,
+        weather: false
+      }
+
       break;
 
     default:
