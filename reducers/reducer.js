@@ -1,4 +1,4 @@
-export function reducer(state = {}, action) {
+export function reducer(state = {} , action) {
 
   console.log(action.type);
 
