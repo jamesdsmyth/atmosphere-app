@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Text, View, ScrollView } from 'react-native';
 import { Provider } from 'react-redux';
 
@@ -7,7 +7,7 @@ import Wrapper from './components/Wrapper';
 
 import store from './reducers/allReducers';
 
-export default class App extends React.Component {
+export default class App extends Component {
 
   constructor() {
     super();

@@ -1,8 +1,14 @@
-- update colors
-- fix tests
-- auto fresh every 30 minutes
-- night time if clear will show a moon
-- user chooses whether they like the color or not using Firebase
+--- structure ---
 
-so now I need to wrap the store using a connect in my weather list class.
-this is because we have already provided it by wrapping it in the main app.
+entry point is App.js
+  from here we provide it (wrap it) with the store. Within this is the <Wrapper />
+
+  <Wrapper /> is passed the state using redux.
+    here we have if statements to show the correct screen depending on where the API request is.
+
+    the possible screens here are 
+      <ClimateScreen />
+      <ErrorScreen />
+      <FetchingScreen />
+
+      depending on what the response is the from API call (using axios), we display the correct screen
