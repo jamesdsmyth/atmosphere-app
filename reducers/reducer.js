@@ -1,7 +1,4 @@
-import * as types from '../constants/actionTypes';
-
-
-export function reducer(state = { weather: false}, action) {
+export function reducer(state = {}, action) {
 
   console.log(action.type);
 
