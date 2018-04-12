@@ -31,7 +31,9 @@ class WeatherList extends Component {
 
     const appState = this.props.appState;
 
-    const weatherArray = appState.weather != null && appState.weather.list;
+    console.log('WEATHER ARRAY IS', appState);
+
+    const weatherArray = appState.weather != false && appState.weather;
     const fetchingAPI = appState.fetching;
     const APIError = appState.error;
 
@@ -45,11 +47,11 @@ class WeatherList extends Component {
       return (
         <Text style={styles.warningText}>Failed to load climate!</Text>
       )
-    } else {
+    } else if (weatherArray){
       return (
         // if API_CALL_SUCCESS
         
-        weatherArray.map((x, i) => {
+        weatherArray.list.map((x, i) => {
 
           while(i < 6) {
             const temperature = Math.round(x.main.temp - 273.15);
@@ -82,70 +84,11 @@ class WeatherList extends Component {
           }
         })
       )
+    } else {
+      return (
+        <Text>Loading</Text>
+      )
     }
-
-
-
-
-    // return (
-    //   // <Text>bRESH</Text>
-    //   <ScrollView 
-    //     refreshControl={
-    //       <RefreshControl
-    //         refreshing={this.state.refreshing}
-    //         onRefresh={this.refreshView.bind(this)}
-    //       />
-    //     }
-    //     contentContainerStyle={styles.container}
-    //   >
-      
-
-    //     {
-    //       // if API_CALL_REQUEST
-    //       fetchingAPI && <Text style={styles.loadingText}>Fetching your climate...</Text>
-    //     }
-
-    //     {
-    //       APIError ? <Text style={styles.warningText}>Failed to load climate!</Text>
-
-    //       :
-
-    //       // // if API_CALL_SUCCESS
-    //       // weatherArray.map((x, i) => {
-
-    //       //   while(i < 6) {
-    //       //     const temperature = Math.round(x.main.temp - 273.15);
-    //       //     const sectionClass = i === 0 ? styles.sectionNow : styles.sectionLater;
-    //       //     const updatedTemperature = temperature < 0 ? temperature + 100 : temperature;
-    //       //     const sectionTemperature = styles[`section${updatedTemperature}`];
-    //       //     const timeArray = x.dt_txt.split('');
-    //       //     const strippedTime = timeArray.slice(timeArray.length - 8, timeArray.length - 3);
-
-    //       //     return  <View 
-    //       //               style={[styles.section, sectionClass, sectionTemperature]} 
-    //       //               key={i}
-    //       //             >
-    //       //               {
-    //       //                 i === 0 ?
-    //       //                 <View style={[styles.sectionInner]} key={i}>
-    //       //                   <Text style={styles.sectionText} key={i}>
-    //       //                     {temperature}&#176;c and {x.weather[0].main.toLowerCase()} right now
-    //       //                   </Text>
-    //       //                   <WeatherSvg weatherType={x.weather[0].main} />
-    //       //                 </View>:
-    //       //                 <View style={[styles.sectionInner]} key={i}>
-    //       //                   <Text style={styles.sectionText} key={i}>
-    //       //                     {temperature}&#176;c at {strippedTime}
-    //       //                   </Text>
-    //       //                   <WeatherSvg weatherType={x.weather[0].main} />
-    //       //                 </View>
-    //       //               }
-    //       //             </View>;
-    //       //   }
-    //       // })
-    //     // }
-    //   </ScrollView>
-    // )
   }
 }
 

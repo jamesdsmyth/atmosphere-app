@@ -12,7 +12,7 @@ export function* createLessonAsync() {
       // });
 
       let lat = 37;
-      let lng = -1123;
+      let lng = -123;
       
       const url = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lng},&mode=json&appid=fb161b8bdfd1a946ed269b0b2cf42b77`;  
       

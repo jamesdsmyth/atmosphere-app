@@ -1,6 +1,9 @@
 import * as types from '../constants/actionTypes';
 
-export function reducer(state = {}, action) {
+
+export function reducer(state = { weather: false}, action) {
+
+  console.log(action.type);
 
   switch (action.type) {
     case 'API_CALL_REQUEST':
