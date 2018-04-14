@@ -6,10 +6,10 @@ function* location() {
   console.log('inside location');
 
   let coords = {};
-  yield navigator.geolocation.getCurrentPosition(function(position) {
+  yield dispatch(navigator.geolocation.getCurrentPosition(function(position) {
     coords.lat = Math.floor(position.coords.latitude);
     coords.lng = Math.floor(position.coords.longitude);
-  });
+  }));
 }
 
 // our worker saga

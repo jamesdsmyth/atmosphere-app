@@ -41,6 +41,12 @@ const styles = StyleSheet.create({
     flex: 5,
     borderTopWidth: 0
   },
+  sectionFull: {
+    flex: 10
+  },
+  sectionHide: {
+    flex: 0
+  },
   sectionLater: {
     backgroundColor: '#c4d24a',
     flex: 1

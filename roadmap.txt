@@ -1,14 +1,7 @@
---- structure ---
+--- Roadmap ---
 
-entry point is App.js
-  from here we provide it (wrap it) with the store. Within this is the <Wrapper />
-
-  <Wrapper /> is passed the state using redux.
-    here we have if statements to show the correct screen depending on where the API request is.
-
-    the possible screens here are 
-      <ClimateScreen />
-      <ErrorScreen />
-      <FetchingScreen />
-
-      depending on what the response is the from API call (using axios), we display the correct screen
+Prompt asks if the current color is suitable.
+ - clicking yes dispatches an action to firebase.
+ - clicking no displays 2 colors side by side.
+  - the top color is the old color and the bottom color is a new color from firebase.
+  - to approach this I need to first create the click events and css to view different colors.
