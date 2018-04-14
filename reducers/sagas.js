@@ -17,9 +17,9 @@ export function* getClimate() {
 
     try {
 
-      const coords = yield call(location);
-
-      console.log('the coords areee', coords);
+      const coords = {};
+      coords.lat = 40;
+      coords.lng = -74;
       
       const url = `http://api.openweathermap.org/data/2.5/forecast?lat=${coords.lat}&lon=${coords.lng},&mode=json&appid=fb161b8bdfd1a946ed269b0b2cf42b77`;  
       

@@ -14,6 +14,9 @@ export function reducer(state = {} , action) {
       break;
       
     case 'API_CALL_SUCCESS':
+
+      console.log('INSIDE THE SUCCESS REDUCERRRRRRRRR');
+      
       return { 
         ...state, 
         fetching: false, 
