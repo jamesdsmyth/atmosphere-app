@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
   sectionLater: {
     flex: 1
   },
-  sectionFull: {
+  sectionShow: {
     flex: 10,
     borderTopWidth: 0
   },

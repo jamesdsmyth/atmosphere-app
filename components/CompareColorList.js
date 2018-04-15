@@ -1,6 +1,9 @@
 import React from 'react';
-import { Text } from 'react-native';
+import { Text, TouchableHighlight } from 'react-native';
 
-export default CompareColorList = () => (
-  <Text>CompareColorList</Text>
+export default CompareColorList = ( { closeColor } ) => (
+  <TouchableHighlight
+    onPress={() => closeColor()}>
+    <Text>Close color</Text>
+  </TouchableHighlight>
 )

@@ -14,7 +14,7 @@ export default class ClimateScreen extends Component {
     super();
 
     this.state = {
-      fullScreen: false
+      showClimateList: true
     }
 
     this.openColor = this.openColor.bind(this);
@@ -22,28 +22,30 @@ export default class ClimateScreen extends Component {
   }
   
   openColor() {
-    alert('clicked open');
     this.setState({
-      fullScreen: true
+      showClimateList: false
     });
   }
 
   closeColor() {
-    alert('clicked close');
     this.setState({
-      fullScreen: false
+      showClimateList: true
     })
   }
   
   render() {
-    
+
     return (
       <View>
-        <CompareColorList />
+        <CompareColorList
+          closeColor={this.closeColor}
+          isVisible={false}
+        />
         <ClimateList
           weather={this.props.weather.list}
           openColor={this.openColor}
           closeColor={this.closeColor}
+          isVisible={this.state.showClimateList}
         />
       </View>
     )
