@@ -4,7 +4,7 @@ import SvgUri from 'react-native-svg-uri';
 import WeatherSvg from './WeatherSvg';
 import styles from '../assets/styles/styles';
 
-export default ClimateList = ( { weather } ) => (
+export default ClimateList = ( { weather, openColor, closeColor } ) => (
   weather.map((x, i) => {
 
     while(i < 6) {
@@ -39,11 +39,11 @@ export default ClimateList = ( { weather } ) => (
                     </View>
                     <Text>Does this color feel right to you?</Text>
                     <TouchableHighlight
-                      onPress={() => this.closeColor()}>
+                      onPress={() => closeColor()}>
                       <Text>Yes</Text>
                     </TouchableHighlight>
                     <TouchableHighlight
-                      onPress={() => this.expandColor()}>
+                      onPress={() => openColor()}>
                       <Text>No</Text>
                     </TouchableHighlight>
                   </View>

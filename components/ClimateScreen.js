@@ -16,26 +16,35 @@ export default class ClimateScreen extends Component {
     this.state = {
       fullScreen: false
     }
+
+    this.openColor = this.openColor.bind(this);
+    this.closeColor = this.closeColor.bind(this);
   }
   
-  expandColor() {
+  openColor() {
+    alert('clicked open');
     this.setState({
       fullScreen: true
     });
   }
 
   closeColor() {
+    alert('clicked close');
     this.setState({
       fullScreen: false
     })
   }
   
   render() {
-    console.log(this.props.weather.list)
+    
     return (
       <View>
         <CompareColorList />
-        <ClimateList weather={this.props.weather.list} />
+        <ClimateList
+          weather={this.props.weather.list}
+          openColor={this.openColor}
+          closeColor={this.closeColor}
+        />
       </View>
     )
   }
