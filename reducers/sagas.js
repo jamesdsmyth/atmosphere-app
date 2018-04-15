@@ -3,13 +3,11 @@ import axios from 'axios';
 
 function* location() {
 
-  console.log('inside location');
-
   let coords = {};
-  yield dispatch(navigator.geolocation.getCurrentPosition(function(position) {
+  yield navigator.geolocation.getCurrentPosition(function(position) {
     coords.lat = Math.floor(position.coords.latitude);
     coords.lng = Math.floor(position.coords.longitude);
-  }));
+  });
 }
 
 // our worker saga
@@ -24,6 +22,7 @@ export function* getClimate() {
       const url = `http://api.openweathermap.org/data/2.5/forecast?lat=${coords.lat}&lon=${coords.lng},&mode=json&appid=fb161b8bdfd1a946ed269b0b2cf42b77`;  
       
       // axios will take 2 or 3 arguments. the method (axios.get/axios.post, url, arguments);
+      
       const response = yield call(axios.get, url);
 
       // passing action of type and response

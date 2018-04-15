@@ -20,6 +20,12 @@ export default class ClimateScreen extends Component {
       fullScreen: true
     });
   }
+
+  closeColor() {
+    this.setState({
+      fullScreen: false
+    })
+  }
   
   render() {
     return (
@@ -61,7 +67,7 @@ export default class ClimateScreen extends Component {
                           <Text>Yes</Text>
                         </TouchableHighlight>
                         <TouchableHighlight
-                          onPress={() => alert('color is bad')}>
+                          onPress={() => this.closeColor()}>
                           <Text>No</Text>
                         </TouchableHighlight>
                       </View>

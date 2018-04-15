@@ -37,19 +37,18 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between'
   },
   sectionNow: {
-    backgroundColor: '#83c359',
     flex: 5,
     borderTopWidth: 0
   },
+  sectionLater: {
+    flex: 1
+  },
   sectionFull: {
-    flex: 10
+    flex: 10,
+    borderTopWidth: 0
   },
   sectionHide: {
-    flex: 0
-  },
-  sectionLater: {
-    backgroundColor: '#c4d24a',
-    flex: 1
+    display: 'none'
   },
   backgroundImage: {
     width: 100,
