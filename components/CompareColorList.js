@@ -1,9 +1,11 @@
 import React from 'react';
-import { Text, TouchableHighlight } from 'react-native';
+import { View, Animated, Text, TouchableHighlight } from 'react-native';
 
-export default CompareColorList = ( { closeColor } ) => (
-  <TouchableHighlight
-    onPress={() => closeColor()}>
-    <Text>Close color</Text>
-  </TouchableHighlight>
+export default CompareColorList = ( { closeColor, isVisible } ) => (
+  <Animated.View style={{ top: isVisible }}>
+    <TouchableHighlight
+      onPress={() => closeColor()}>
+      <Text>Close color</Text>
+    </TouchableHighlight>
+  </Animated.View>
 )

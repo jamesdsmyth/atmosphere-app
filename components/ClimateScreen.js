@@ -1,12 +1,19 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableHighlight } from 'react-native';
+import { View, Animated, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
-import SvgUri from 'react-native-svg-uri';
-import WeatherSvg from './WeatherSvg';
-import styles from '../assets/styles/styles';
 
 import ClimateList from './ClimateList';
 import CompareColorList from './CompareColorList';
+
+const window = Dimensions.get('window');
+
+//
+// ClimateScreen contains 2 sections (ClimateList, CompareColorList)
+// Only one is shown at a time depending on the actions of the user.
+// openColor, closeColor are both functions and passed to ClimateList
+// Clicking either of these functions will animate both sections to show
+// either one or the other.
+//
 
 export default class ClimateScreen extends Component {
 
@@ -14,7 +21,9 @@ export default class ClimateScreen extends Component {
     super();
 
     this.state = {
-      showClimateList: true
+      showClimateList: true,
+      climateListHeight: new Animated.Value(0),
+      compareColorListHeight: new Animated.Value(window.height * -1)
     }
 
     this.openColor = this.openColor.bind(this);
@@ -25,12 +34,28 @@ export default class ClimateScreen extends Component {
     this.setState({
       showClimateList: false
     });
+
+    Animated.timing(
+      this.state.climateListHeight,
+      {
+        toValue: window.height,
+        duration: 1000
+      }
+    ).start();
+
+    Animated.timing(
+      this.state.compareColorListHeight,
+      {
+        toValue: 0,
+        duration: 1000
+      }
+    ).start();
   }
 
   closeColor() {
     this.setState({
       showClimateList: true
-    })
+    });
   }
   
   render() {
@@ -39,13 +64,13 @@ export default class ClimateScreen extends Component {
       <View>
         <CompareColorList
           closeColor={this.closeColor}
-          isVisible={false}
+          isVisible={this.state.compareColorListHeight}
         />
         <ClimateList
           weather={this.props.weather.list}
           openColor={this.openColor}
           closeColor={this.closeColor}
-          isVisible={this.state.showClimateList}
+          isVisible={this.state.climateListHeight}
         />
       </View>
     )
