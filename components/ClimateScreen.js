@@ -48,7 +48,7 @@ export default class ClimateScreen extends Component {
             sectionClass = i === 0 ? styles.sectionNow : styles.sectionLater;
           }
 
-          return  <View 
+          return  <View
                     style={[styles.section, sectionClass, sectionTemperature]} 
                     key={i}
                   >
@@ -63,11 +63,11 @@ export default class ClimateScreen extends Component {
                         </View>
                         <Text>Does this color feel right to you?</Text>
                         <TouchableHighlight
-                          onPress={() => this.expandColor()}>
+                          onPress={() => this.closeColor()}>
                           <Text>Yes</Text>
                         </TouchableHighlight>
                         <TouchableHighlight
-                          onPress={() => this.closeColor()}>
+                          onPress={() => this.expandColor()}>
                           <Text>No</Text>
                         </TouchableHighlight>
                       </View>
