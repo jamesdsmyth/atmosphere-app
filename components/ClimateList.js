@@ -9,7 +9,7 @@ export default ClimateList = ( { weather, openColor, closeColor, isVisible } ) =
   console.log(isVisible);
   return (
     // <Animated.View style={isVisible ? styles.sectionShow : styles.sectionHide}>
-    <Animated.View style={{ marginRight: isVisible }}>
+    <Animated.View style={{ marginTop: isVisible }}>
       {
         weather.map((x, i) => {
 

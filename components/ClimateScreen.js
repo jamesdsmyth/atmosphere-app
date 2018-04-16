@@ -35,22 +35,24 @@ export default class ClimateScreen extends Component {
       showClimateList: false
     });
 
-    Animated.timing(
-      this.state.climateListHeight,
-      {
-        toValue: window.height,
-        duration: 1000
-      }
-    ).start();
-
-    Animated.timing(
-      this.state.compareColorListHeight,
-      {
-        toValue: 0,
-        easing: Easing.ease,
-        duration: 1000
-      }
-    ).start();
+    Animated.parallel([
+      Animated.timing(
+        this.state.climateListHeight,
+        {
+          toValue: window.height,
+          duration: 1000
+        }
+      ).start(),
+  
+      Animated.timing(
+        this.state.compareColorListHeight,
+        {
+          toValue: 0,
+          easing: Easing.ease,
+          duration: 1000
+        }
+      ).start()
+    ])
   }
 
   closeColor() {
