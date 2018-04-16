@@ -41,15 +41,14 @@ const styles = StyleSheet.create({
     borderTopWidth: 0
   },
   sectionLater: {
-    flex: 1
+    flex: 1,
   },
-  sectionShow: {
-    flex: 10,
-    borderTopWidth: 0
+
+  // CompareColorList component
+  sectionThird: {
+    flex: 3.33333
   },
-  sectionHide: {
-    display: 'none'
-  },
+
   backgroundImage: {
     width: 100,
     height: 100,

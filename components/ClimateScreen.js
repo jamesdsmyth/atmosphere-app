@@ -22,8 +22,8 @@ export default class ClimateScreen extends Component {
 
     this.state = {
       showClimateList: true,
-      climateListHeight: new Animated.Value(0),
-      compareColorListHeight: new Animated.Value(window.height * -1)
+      climateList: new Animated.Value(1),
+      compareColorList: new Animated.Value(0)
     }
 
     this.openColor = this.openColor.bind(this);
@@ -37,17 +37,17 @@ export default class ClimateScreen extends Component {
 
     Animated.parallel([
       Animated.timing(
-        this.state.climateListHeight,
+        this.state.climateList,
         {
-          toValue: window.height,
+          toValue: 0,
           duration: 1000
         }
       ).start(),
   
       Animated.timing(
-        this.state.compareColorListHeight,
+        this.state.compareColorList,
         {
-          toValue: 0,
+          toValue: 1,
           easing: Easing.ease,
           duration: 1000
         }
@@ -60,20 +60,25 @@ export default class ClimateScreen extends Component {
       showClimateList: true
     });
   }
+
+  onClickColor(word) {
+    alert(word);
+  }
   
   render() {
 
     return (
       <View>
-        <CompareColorList
-          closeColor={this.closeColor}
-          isVisible={this.state.compareColorListHeight}
-        />
-        <ClimateList
+        {/* <ClimateList
           weather={this.props.weather.list}
           openColor={this.openColor}
           closeColor={this.closeColor}
-          isVisible={this.state.climateListHeight}
+          isVisible={this.state.climateList}
+        /> */}
+        <CompareColorList
+          closeColor={this.closeColor}
+          isVisible={this.state.compareColorList}
+          onClickColor={this.onClickColor}
         />
       </View>
     )

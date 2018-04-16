@@ -5,11 +5,8 @@ import WeatherSvg from './WeatherSvg';
 import styles from '../assets/styles/styles';
 
 export default ClimateList = ( { weather, openColor, closeColor, isVisible } ) => {
-
-  console.log(isVisible);
   return (
-    // <Animated.View style={isVisible ? styles.sectionShow : styles.sectionHide}>
-    <Animated.View style={{ marginTop: isVisible }}>
+    <Animated.View style={{ opacity: isVisible }}>
       {
         weather.map((x, i) => {
 
@@ -25,7 +22,7 @@ export default ClimateList = ( { weather, openColor, closeColor, isVisible } ) =
             let sectionClass = i === 0 ? styles.sectionNow : styles.sectionLater;
       
             return  <View
-                      style={[styles.section, sectionClass, sectionTemperature]} 
+                      style={[styles.section, sectionClass, sectionTemperature]}
                       key={i}
                     >
                       {
