@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Animated, Dimensions } from 'react-native';
+import { View, Animated, Easing, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
 
 import ClimateList from './ClimateList';
@@ -47,6 +47,7 @@ export default class ClimateScreen extends Component {
       this.state.compareColorListHeight,
       {
         toValue: 0,
+        easing: Easing.ease,
         duration: 1000
       }
     ).start();

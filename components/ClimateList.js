@@ -9,7 +9,7 @@ export default ClimateList = ( { weather, openColor, closeColor, isVisible } ) =
   console.log(isVisible);
   return (
     // <Animated.View style={isVisible ? styles.sectionShow : styles.sectionHide}>
-    <Animated.View style={{ top: isVisible }}>
+    <Animated.View style={{ marginRight: isVisible }}>
       {
         weather.map((x, i) => {
 
@@ -31,7 +31,7 @@ export default ClimateList = ( { weather, openColor, closeColor, isVisible } ) =
                       {
                         i === 0 ?
                         <View>
-                          <View style={[styles.sectionInner]} key={i}>
+                          <View style={styles.sectionInner} key={i}>
                             <Text style={styles.sectionText} key={i}>
                               {temperature}&#176;c and {x.weather[0].main.toLowerCase()} right now
                             </Text>
