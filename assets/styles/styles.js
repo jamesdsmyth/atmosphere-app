@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
 
   // CompareColorList component
   sectionThird: {
-    flex: 3.33333
+    flex: 3
   },
 
   backgroundImage: {

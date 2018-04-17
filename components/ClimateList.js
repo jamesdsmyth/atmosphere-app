@@ -5,8 +5,6 @@ import WeatherSvg from './WeatherSvg';
 import styles from '../assets/styles/styles';
 
 export default ClimateList = ( { weather, openColor, closeColor, isVisible } ) => {
-
-  console.log('IS THIS VISIBLE?', isVisible);
   return (
     // <Animated.View style={{ opacity: isVisible }}>
     isVisible && 

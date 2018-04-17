@@ -116,7 +116,7 @@ export default class ClimateScreen extends Component {
           closeColor={this.closeColor}
           isVisible={this.state.compareColorList}
           onClickColor={this.createCompareColorListColors}
-          colors={[this.state.lighterColor, this.state.currentColor, this.state.darkerColor]}
+          colors={[1, 2, 3]}
         />
       </View>
     )

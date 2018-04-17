@@ -4,18 +4,18 @@ import styles from '../assets/styles/styles';
 
 export default CompareColorList = ( { closeColor, isVisible, onClickColor, colors } ) => {
 
-  console.log('this colors', colors);
+  console.log('this colors', colors, isVisible);
   return (
     isVisible &&
     <View style={styles.section}>
       {
-        
-        colors.forEach((color, i) => {
+        colors.map((color, i) => {
           return <View 
             style={[styles.section, styles.sectionThird, { 'backgroundColor': 'rgb(201, 218, 85)'}]}
             onPress={() => onClickColor()}
-            key={i}>
-            <Text>{color.r}</Text>
+            key={i}
+          >
+            <Text>breshhh {color}</Text>
           </View>
         })
       }
