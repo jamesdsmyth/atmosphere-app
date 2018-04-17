@@ -21,64 +21,102 @@ export default class ClimateScreen extends Component {
     super();
 
     this.state = {
-      showClimateList: true,
-      climateList: new Animated.Value(1),
-      compareColorList: new Animated.Value(0)
+      // climateList: new Animated.Value(1),
+      // compareColorList: new Animated.Value(0),
+      climateList: true,
+      compareColorList: false,
+      currentColor: {
+        r: 201,
+        g: 218,
+        b: 85
+      },
+      lighterColor: {
+        r: 201,
+        g: 218,
+        b: 85
+      },
+      darkerColor: {
+        r: 201,
+        g: 218,
+        b: 85
+      }
     }
 
     this.openColor = this.openColor.bind(this);
     this.closeColor = this.closeColor.bind(this);
+    this.createCompareColorListColors = this.createCompareColorListColors.bind(this);
   }
   
   openColor() {
     this.setState({
-      showClimateList: false
+      climateList: false,
+      compareColorList: true
     });
 
-    Animated.parallel([
-      Animated.timing(
-        this.state.climateList,
-        {
-          toValue: 0,
-          duration: 1000
-        }
-      ).start(),
+    console.log('open color clicked');
+
+    // Animated.parallel([
+    //   Animated.timing(
+    //     this.state.climateList,
+    //     {
+    //       toValue: 0,
+    //       easing: Easing.ease,
+    //       duration: 200
+    //     }
+    //   ).start(),
   
-      Animated.timing(
-        this.state.compareColorList,
-        {
-          toValue: 1,
-          easing: Easing.ease,
-          duration: 1000
-        }
-      ).start()
-    ])
+    //   Animated.timing(
+    //     this.state.compareColorList,
+    //     {
+    //       toValue: 1,
+    //       easing: Easing.ease,
+    //       duration: 200
+    //     }
+    //   ).start()
+    // ])
   }
 
   closeColor() {
     this.setState({
-      showClimateList: true
+      climateList: true,
+      compareColorList: false
     });
   }
 
-  onClickColor(word) {
-    alert(word);
+  onClickColor(color) {
+    console.log(color);
+  }
+
+  createCompareColorListColors() {
+    let color = this.state.currentColor;
+
+    let lighter = Object.assign({}, color);
+    lighter.r = lighter.r - 30;
+
+    let darker = Object.assign({}, color);
+    darker.r = darker.r + 30;
+
+    this.setState({
+      lighterColor: lighter,
+      darkerColor: darker
+    });
   }
   
   render() {
 
     return (
       <View>
-        {/* <ClimateList
+        <ClimateList
           weather={this.props.weather.list}
           openColor={this.openColor}
           closeColor={this.closeColor}
           isVisible={this.state.climateList}
-        /> */}
+        />
         <CompareColorList
           closeColor={this.closeColor}
           isVisible={this.state.compareColorList}
-          onClickColor={this.onClickColor}
+          onClickColor={this.createCompareColorListColors}
+          colors={[this.state.lighterColor, this.state.currentColor, this.state.darkerColor]}
         />
       </View>
     )

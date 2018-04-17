@@ -3,23 +3,23 @@ import { StyleSheet, Dimensions } from 'react-native';
 
 const window = Dimensions.get('window');
 const constants = {
-  purple: '#5d2497', // -10 - -1
-  blue: '#2f358f', // 0 -5
-  lightBlue: '#0a56a2', // 6 - 10
-  lightGreen: '#1aa79d', // 11 - 15
-  green: '#c9da55', // 16 - 20
-  yellow: '#fef036', // 21 - 25
-  lightOrange: '#fec42e', // 26 - 30
-  orange: '#fd9326', // 31 - 35
-  darkOrange: '#f16631', // 36 - 40
-  red: '#eb212f', // 41 - 50,
-  white: '#ffffff'
+  purple: 'rgb(93,36,151)', // -10 - -1
+  blue: 'rgb(47,53,143)', // 0 -5
+  lightBlue: 'rgb(10,86,162)', // 6 - 10
+  lightGreen: 'rgb(26,167,157)', // 11 - 15
+  green: 'rgb(201,218,85)', // 16 - 20
+  yellow: 'rgb(254,240,54)', // 21 - 25
+  lightOrange: 'rgb(254,196,46)', // 26 - 30
+  orange: 'rgb(253,147,38)', // 31 - 35
+  darkOrange: 'rgb(241,102,49)', // 36 - 40
+  red: 'rgb(235,33,47)', // 41 - 50,
+  white: 'rgb(255,255,255)'
 }
 const styles = StyleSheet.create({
   container: {
     flex: 10,
     flexDirection: 'column',
-    backgroundColor: '#fff',
+    backgroundColor: constants.white,
     alignItems: 'center',
     justifyContent: 'center',
     width: window.width
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     paddingRight: 10,
     justifyContent: 'center',
     borderTopWidth: 1,
-    borderColor: '#fff'
+    borderColor: constants.white
   },
   sectionInner: {
     flexDirection: 'row',
