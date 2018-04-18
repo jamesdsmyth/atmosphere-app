@@ -7,15 +7,15 @@ export default CompareColorList = ( { closeColor, isVisible, onClickColor, color
   console.log('this colors', colors, isVisible);
   return (
     isVisible &&
-    <View style={styles.section}>
+    <View>
       {
         colors.map((color, i) => {
           return <View 
-            style={[styles.section, styles.sectionThird, { 'backgroundColor': 'rgb(201, 218, 85)'}]}
+            style={[styles.section, styles.sectionLater, { 'backgroundColor': `rgb(${color.r}, ${color.g}, ${color.b})`}]}
             onPress={() => onClickColor()}
             key={i}
           >
-            <Text>breshhh {color}</Text>
+            <Text>{color.r}</Text>
           </View>
         })
       }

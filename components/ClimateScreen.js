@@ -48,32 +48,14 @@ export default class ClimateScreen extends Component {
   }
   
   openColor() {
+
+    // need to set currentColor here.
     this.setState({
       climateList: false,
       compareColorList: true
     });
 
-    console.log('open color clicked');
-
-    // Animated.parallel([
-    //   Animated.timing(
-    //     this.state.climateList,
-    //     {
-    //       toValue: 0,
-    //       easing: Easing.ease,
-    //       duration: 200
-    //     }
-    //   ).start(),
-  
-    //   Animated.timing(
-    //     this.state.compareColorList,
-    //     {
-    //       toValue: 1,
-    //       easing: Easing.ease,
-    //       duration: 200
-    //     }
-    //   ).start()
-    // ])
+    this.createCompareColorListColors();
   }
 
   closeColor() {
@@ -116,7 +98,7 @@ export default class ClimateScreen extends Component {
           closeColor={this.closeColor}
           isVisible={this.state.compareColorList}
           onClickColor={this.createCompareColorListColors}
-          colors={[1, 2, 3]}
+          colors={[this.state.lighterColor, this.state.currentColor, this.state.darkerColor]}
         />
       </View>
     )
