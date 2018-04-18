@@ -45,9 +45,12 @@ export default class ClimateScreen extends Component {
     this.openColor = this.openColor.bind(this);
     this.closeColor = this.closeColor.bind(this);
     this.createCompareColorListColors = this.createCompareColorListColors.bind(this);
+    this.onClickColor = this.onClickColor.bind(this);
   }
   
   openColor() {
+
+    // need to get the color clicked
 
     // need to set currentColor here.
     this.setState({
@@ -67,6 +70,7 @@ export default class ClimateScreen extends Component {
 
   onClickColor(color) {
     console.log(color);
+    alert('color clicked');
   }
 
   createCompareColorListColors() {
@@ -97,7 +101,7 @@ export default class ClimateScreen extends Component {
         <CompareColorList
           closeColor={this.closeColor}
           isVisible={this.state.compareColorList}
-          onClickColor={this.createCompareColorListColors}
+          onClickColor={this.onClickColor}
           colors={[this.state.lighterColor, this.state.currentColor, this.state.darkerColor]}
         />
       </View>
