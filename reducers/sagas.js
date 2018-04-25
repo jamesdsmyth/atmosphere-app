@@ -15,6 +15,7 @@ export function* getClimate() {
 
     try {
 
+      // need to wrap this in a navigator.geolocation request here.
       const coords = {};
       coords.lat = 40;
       coords.lng = -74;
