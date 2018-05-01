@@ -73,7 +73,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = dispatch => {
   return {
     onRequestWeather: () => dispatch({ type: "API_CALL_REQUEST" })
-  };
-};
+  }
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Wrapper);

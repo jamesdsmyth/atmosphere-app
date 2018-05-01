@@ -1,6 +1,6 @@
 export function reducer(state = {} , action) {
 
-  console.log(action.type);
+  console.log('action', action.type);
 
   switch (action.type) {
     case 'API_CALL_REQUEST':
@@ -14,9 +14,6 @@ export function reducer(state = {} , action) {
       break;
       
     case 'API_CALL_SUCCESS':
-
-      console.log('INSIDE THE SUCCESS REDUCERRRRRRRRR');
-      
       return { 
         ...state, 
         fetching: false, 
@@ -32,6 +29,26 @@ export function reducer(state = {} , action) {
         fetching: false, 
         error: true,
         weather: false
+      }
+
+      break;
+
+    case 'GEOLOCATION_CALL_SUCCESS':
+      return { 
+        ...state, 
+        fetching: false, 
+        error: false,
+        geolocation: action.response
+      }
+
+      break;
+
+    case 'GEOLOCATION_CALL_FAILURE':
+      return { 
+        ...state, 
+        fetching: false, 
+        error: true,
+        geolocation: false
       }
 
       break;
