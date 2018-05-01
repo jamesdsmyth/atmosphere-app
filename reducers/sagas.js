@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const getCurrentPosition = (options = {}) => {
   return new Promise((resolve, reject) => {
-    navigator.geolocation.getCurrentPosition(resolve, reject, options);
+    return navigator.geolocation.getCurrentPosition(resolve, reject, options);
   });
 }
 
@@ -11,12 +11,15 @@ const getCurrentPosition = (options = {}) => {
 function* getGeoLocation() {
   try {
 
+    // const position = await getCurrentPosition();
+    // const { latitude, longitude } = position.coords;
+
     const response = yield getCurrentPosition();
 
+    console.log('hereeeee', response)
+
     yield put({ 'type': 'GEOLOCATION_CALL_SUCCESS', response: response });
-
   } catch(error) {
-
     yield put({ 'type': 'GEOLOCATION_CALL_FAILURE', response: 'error' });
 
   }
