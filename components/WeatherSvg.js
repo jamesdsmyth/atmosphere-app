@@ -2,6 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 import SvgUri from 'react-native-svg-uri';
 import styles from '../assets/styles/styles';
+import PropTypes from 'prop-types';
 
 const WeatherSvg = (props) => {
 
@@ -41,6 +42,10 @@ const WeatherSvg = (props) => {
     />
     </View>
   )
+}
+
+WeatherSvg.propTypes = {
+  props: PropTypes.array
 }
 
 export default WeatherSvg;

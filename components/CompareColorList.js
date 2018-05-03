@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableHighlight } from 'react-native';
 import styles from '../assets/styles/styles';
+import PropTypes from 'prop-types';
 
 export default CompareColorList = ( { closeColor, isVisible, onClickColor, colors } ) => {
   return (
@@ -19,4 +20,11 @@ export default CompareColorList = ( { closeColor, isVisible, onClickColor, color
       }
     </View>
   )
+}
+
+CompareColorList.propTypes = {
+  closeColor: PropTypes.func,
+  isVisible: PropTypes.bool,
+  onClickColor: PropTypes.func,
+  colors: PropTypes.array
 }
