@@ -3,10 +3,10 @@ import { Text, View, Animated, TouchableHighlight } from 'react-native';
 import SvgUri from 'react-native-svg-uri';
 import WeatherSvg from './WeatherSvg';
 import styles from '../assets/styles/styles';
+import PropTypes from 'prop-types';
 
 export default ClimateList = ( { weather, openColor, closeColor, isVisible } ) => {
   return (
-    // <Animated.View style={{ opacity: isVisible }}>
     isVisible && 
     <View>
       {
@@ -59,6 +59,12 @@ export default ClimateList = ( { weather, openColor, closeColor, isVisible } ) =
         })
       }
       </View>
-    // </Animated.View>
   )
+}
+
+ClimateList.propTypes = {
+  weather: PropTypes.array,
+  openColor: PropTypes.func,
+  closeColor: PropTypes.func,
+  isVisible: PropTypes.bool
 }
