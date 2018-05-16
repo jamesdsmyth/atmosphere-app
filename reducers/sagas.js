@@ -3,6 +3,8 @@ import axios from 'axios';
 import { RotationGestureHandler } from 'react-native-gesture-handler';
 
 function* geolocation() {
+
+  console.log('inside');
   // return navigator.geolocation.getCurrentPosition(function(response) {
   //   return response;
   // });
@@ -14,46 +16,57 @@ function* geolocation() {
 
 function* getGeolocation() {
 
-  // const geo = yield geolocation();
-  const geo = yield call(geolocation);
+  const b = yield geolocation();
 
-  const coords = {
-    lat: Math.floor(geo.latitude),
-    lng: Math.floor(geo.longitude)
+  console.log('and b isssss', b);
+
+  try {
+
+    console.log(111111);
+
+    // need to wrap this in a navigator.geolocation request here.
+    const coords = {};
+    coords.lat = 40;
+    coords.lng = -74;
+    
+    const url = `http://api.openweathermap.org/data/2.5/forecast?lat=${coords.lat}&lon=${coords.lng},&mode=json&appid=fb161b8bdfd1a946ed269b0b2cf42b77`;  
+    
+    // axios will take 2 or 3 arguments. the method (axios.get/axios.post, url, arguments);
+    
+    const response = yield call(axios.get, url);
+
+    console.log(response);
+
+    // passing action of type and response
+    yield put({ 'type': 'API_CALL_SUCCESS', response: response.data });
+  } catch(error) {
+    
+    // throwing an error from our api
+    yield put({ 'type': 'API_CALL_ERROR', response: 'error' });
   }
 
-  console.log('the result of b is', geo);
+  console.log('in this bitch');
 
-  const weather = yield request(`http://api.openweathermap.org/data/2.5/forecast?lat=${coords.lat}&lon=${coords.lng},&mode=json&appid=fb161b8bdfd1a946ed269b0b2cf42b77`);
-  console.log('the weather is', weather);
-  // try {
+  // const geo = yield geolocation();
+  // const geo = yield call(geolocation);
 
-  //   // need to wrap this in a navigator.geolocation request here.
-  //   const coords = {};
-  //   coords.lat = 40;
-  //   coords.lng = -74;
-    
-  //   const url = `http://api.openweathermap.org/data/2.5/forecast?lat=${coords.lat}&lon=${coords.lng},&mode=json&appid=fb161b8bdfd1a946ed269b0b2cf42b77`;  
-    
-  //   // axios will take 2 or 3 arguments. the method (axios.get/axios.post, url, arguments);
-    
-  //   const response = yield call(axios.get, url);
+  // console.log('geo is', geo)
 
-  //   console.log(response);
-
-  //   // passing action of type and response
-  //   yield put({ 'type': 'API_CALL_SUCCESS', response: response.data });
-  // } catch(error) {
-    
-  //   // throwing an error from our api
-  //   yield put({ 'type': 'API_CALL_ERROR', response: 'error' });
+  // const coords = {
+  //   lat: Math.floor(geo.latitude),
+  //   lng: Math.floor(geo.longitude)
   // }
+
+  // console.log('the result of b is', geo);
+
+  // const weather = yield request(`http://api.openweathermap.org/data/2.5/forecast?lat=${coords.lat}&lon=${coords.lng},&mode=json&appid=fb161b8bdfd1a946ed269b0b2cf42b77`);
+  // console.log('the weather is', weather);
+  
 }
 
 // our watcher saga
 export function* watchCreateWeather() {
-  const it = getGeolocation();
-  // it.next();
+  yield getGeolocation();
 }
 
 // single entry point to start all our sagas at once
