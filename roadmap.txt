@@ -5,3 +5,6 @@ Prompt asks if the current color is suitable.
  - clicking no displays 2 colors side by side.
   - the top color is the old color and the bottom color is a new color from firebase.
   - to approach this I need to first create the click events and css to view different colors.
+
+  Saga testing
+  Set up a load of click events that dispatch actions where we can test sagas
