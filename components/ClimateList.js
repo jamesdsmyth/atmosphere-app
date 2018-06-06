@@ -36,7 +36,7 @@ export default ClimateList = ( { weather, openColor, closeColor, isVisible } ) =
                             </Text>
                             <WeatherSvg weatherType={x.weather[0].main} />
                           </View>
-                          {/* <Text>Does this color feel right to you?</Text>
+                          <Text>Does this color feel right to you?</Text>
                           <TouchableHighlight
                             onPress={() => closeColor()}>
                             <Text>Yes</Text>
@@ -44,7 +44,7 @@ export default ClimateList = ( { weather, openColor, closeColor, isVisible } ) =
                           <TouchableHighlight
                             onPress={() => openColor()}>
                             <Text>No</Text>
-                          </TouchableHighlight> */}
+                          </TouchableHighlight>
                         </View>
                         :
                         <View style={styles.sectionInner} key={i}>
