@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
-import { View, Animated, Easing, Dimensions } from 'react-native';
-import { connect } from 'react-redux';
-
-import ClimateList from './ClimateList';
-import CompareColorList from './CompareColorList';
-
-const window = Dimensions.get('window');
+import { View, Text, Button } from 'react-native';
+import WeatherSvg from './WeatherSvg';
+import styles from '../assets/styles/styles';
 
 //
 // ClimateScreen contains 2 sections (ClimateList, CompareColorList)
@@ -17,12 +13,12 @@ const window = Dimensions.get('window');
 
 export default class ClimateScreen extends Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+
+    console.log(props);
 
     this.state = {
-      // climateList: new Animated.Value(1),
-      // compareColorList: new Animated.Value(0),
       climateList: true,
       compareColorList: false,
       currentColor: {
@@ -46,6 +42,7 @@ export default class ClimateScreen extends Component {
     this.closeColor = this.closeColor.bind(this);
     this.createCompareColorListColors = this.createCompareColorListColors.bind(this);
     this.onClickColor = this.onClickColor.bind(this);
+    
   }
   
   openColor() {
@@ -90,20 +87,54 @@ export default class ClimateScreen extends Component {
   
   render() {
 
+    const { weather } = this.props;
+
     return (
       <View>
-        <ClimateList
-          weather={this.props.weather.list}
-          openColor={this.openColor}
-          closeColor={this.closeColor}
-          isVisible={this.state.climateList}
-        />
-        <CompareColorList
-          closeColor={this.closeColor}
-          isVisible={this.state.compareColorList}
-          onClickColor={this.onClickColor}
-          colors={[this.state.lighterColor, this.state.currentColor, this.state.darkerColor]}
-        />
+      {
+        weather.list.map((x, i) => {
+
+          while(i < 6) {
+            const temperature = Math.round(x.main.temp - 273.15);
+            
+            const updatedTemperature = temperature < 0 ? temperature + 100 : temperature;
+            const sectionTemperature = styles[`section${updatedTemperature}`];
+            const timeArray = x.dt_txt.split('');
+            const strippedTime = timeArray.slice(timeArray.length - 8, timeArray.length - 3);
+      
+            // deciding on the section classes
+            let sectionClass = i === 0 ? styles.sectionNow : styles.sectionLater;
+      
+            return  <View
+                      style={[styles.section, sectionClass, sectionTemperature]}
+                      key={i}
+                    >
+                      {
+                        i === 0 ?
+                        <View>
+                          <View style={styles.sectionInner} key={i}>
+                            <Text style={styles.sectionText} key={i}>
+                              {temperature}&#176;c and {x.weather[0].main.toLowerCase()} right now
+                            </Text>
+                            <WeatherSvg weatherType={x.weather[0].main} />
+                          </View>
+                          <Button
+                            title="Go to Details"
+                            onPress={() => this.props.navigation.navigate('Details')}
+                          />
+                        </View>
+                        :
+                        <View style={styles.sectionInner} key={i}>
+                          <Text style={styles.sectionText} key={i}>
+                            {temperature}&#176;c at {strippedTime}
+                          </Text>
+                          <WeatherSvg weatherType={x.weather[0].main} />
+                        </View>
+                      }
+                    </View>;
+          }
+        })
+      }
       </View>
     )
   }

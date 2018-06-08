@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, Animated, TouchableHighlight } from 'react-native';
-import SvgUri from 'react-native-svg-uri';
+import { Text, View, Button } from 'react-native';
 import WeatherSvg from './WeatherSvg';
 import styles from '../assets/styles/styles';
 import PropTypes from 'prop-types';
@@ -36,15 +35,19 @@ export default ClimateList = ( { weather, openColor, closeColor, isVisible } ) =
                             </Text>
                             <WeatherSvg weatherType={x.weather[0].main} />
                           </View>
-                          <Text>Does this color feel right to you?</Text>
-                          <TouchableHighlight
+                          <Button
+                            title="Go to Details"
+                            onPress={() => this.props.navigation.navigate('Details')}
+                          />
+                          {/* <Text>Does this color feel right to you?</Text> */}
+                          {/* <TouchableHighlight
                             onPress={() => closeColor()}>
                             <Text>Yes</Text>
                           </TouchableHighlight>
                           <TouchableHighlight
                             onPress={() => openColor()}>
                             <Text>No</Text>
-                          </TouchableHighlight>
+                          </TouchableHighlight> */}
                         </View>
                         :
                         <View style={styles.sectionInner} key={i}>
