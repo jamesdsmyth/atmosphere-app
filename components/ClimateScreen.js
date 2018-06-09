@@ -88,6 +88,7 @@ export default class ClimateScreen extends Component {
             const sectionTemperature = styles[`section${updatedTemperature}`];
             const timeArray = x.dt_txt.split('');
             const strippedTime = timeArray.slice(timeArray.length - 8, timeArray.length - 3);
+            const weatherType = x.weather[0].main;
       
             // deciding on the section classes
             let sectionClass = i === 0 ? styles.sectionNow : styles.sectionLater;
@@ -101,14 +102,15 @@ export default class ClimateScreen extends Component {
                         <View>
                           <View style={styles.sectionInner} key={i}>
                             <Text style={styles.sectionText} key={i}>
-                              {temperature}&#176;c and {x.weather[0].main.toLowerCase()} right now
+                              {temperature}&#176;c and {weatherType.toLowerCase()} right now
                             </Text>
-                            <WeatherSvg weatherType={x.weather[0].main} />
+                            <WeatherSvg weatherType={weatherType} />
                           </View>
                           <Button
                             title="View more colors"
                             onPress={() => this.props.navigation.navigate('Details', { 
-                              temperature: temperature
+                              temperature: updatedTemperature,
+                              weatherType: weatherType
                             })}
                           />
                         </View>
@@ -117,7 +119,7 @@ export default class ClimateScreen extends Component {
                           <Text style={styles.sectionText} key={i}>
                             {temperature}&#176;c at {strippedTime}
                           </Text>
-                          <WeatherSvg weatherType={x.weather[0].main} />
+                          <WeatherSvg weatherType={weatherType} />
                         </View>
                       }
                     </View>;
