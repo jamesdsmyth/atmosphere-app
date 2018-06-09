@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, Button } from 'react-native';
+import { createStackNavigator } from 'react-navigation';
 import WeatherSvg from './WeatherSvg';
 import styles from '../assets/styles/styles';
 
@@ -87,12 +88,11 @@ export default class ClimateScreen extends Component {
   
   render() {
 
-    const { weather } = this.props;
-
+    console.log(this.props);
     return (
       <View>
       {
-        weather.list.map((x, i) => {
+        this.props.weather.list.map((x, i) => {
 
           while(i < 6) {
             const temperature = Math.round(x.main.temp - 273.15);

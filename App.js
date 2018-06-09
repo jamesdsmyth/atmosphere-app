@@ -8,26 +8,6 @@ import Wrapper from './components/Wrapper';
 
 import store from './reducers/allReducers';
 
-// export default class App extends Component {
-
-//   constructor() {
-//     super();
-//     this.state = {
-//       loaded: false,
-//       loadingFailed: false,
-//       refreshing: false
-//     }
-//   }
-
-//   render() {
-    // return (
-    //   <Provider store={store}>
-    //     <Wrapper />
-    //   </Provider>
-    // )
-//   }
-// }
-
 class HomeScreen extends React.Component {
   render() {
     return (
@@ -44,6 +24,7 @@ class HomeScreen extends React.Component {
 
 class DetailsScreen extends React.Component {
   render() {
+    const { navigation } = this.props;
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Text>Details Screen</Text>

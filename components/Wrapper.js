@@ -32,6 +32,8 @@ class Wrapper extends Component {
 
   render() {
 
+    console.log('wrapper props', this.props);
+
     const appState = this.props.appState;
     const apiError = appState.error;
     const weatherArray = appState.weather != false && appState.weather;
@@ -42,7 +44,9 @@ class Wrapper extends Component {
       content = <ErrorScreen />
 
     } else if (weatherArray) { // API_CALL_SUCCESS
-      content = <ClimateScreen weather={weatherArray} />
+      content = <ClimateScreen 
+        weather={weatherArray} 
+        navigation={this.props.navigation} />
 
     } else { // API_CALL_REQUEST
       content = <FetchingScreen />
