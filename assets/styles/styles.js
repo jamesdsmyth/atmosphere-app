@@ -38,7 +38,8 @@ const styles = StyleSheet.create({
   },
   sectionNow: {
     flex: 5,
-    borderTopWidth: 0
+    borderTopWidth: 0,
+    justifyContent: 'center'
   },
   sectionLater: {
     flex: 1,

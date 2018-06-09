@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, Button } from 'react-native';
+import { View, Text } from 'react-native';
+import styles from '../assets/styles/styles';
 
 export default class MultipleColorsScreen extends Component {
   
@@ -7,9 +8,11 @@ export default class MultipleColorsScreen extends Component {
     const { navigation } = this.props;
     console.log('inside multiple', navigation);
     return (
-      <Text>
-        This page should display 3 new colors
-      </Text>
+      <View style={styles.container}>
+        <Text>
+          This page should display 3 new colors
+        </Text>
+      </View>
     )
   }
 }

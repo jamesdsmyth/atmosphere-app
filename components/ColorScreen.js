@@ -7,12 +7,15 @@ export default class ColorScreen extends Component {
   render() {
 
     const { navigation } = this.props;
+
+    console.log('the props passsed to the color screen is', navigation);
     const temperature = navigation.getParam('temperature');
     const weatherType = navigation.getParam('weatherType');
+    const onClick = navigation.getParam('onClick');
     const sectionTemperature = styles[`section${temperature}`];
 
     return (
-      <View style={[styles.section, sectionTemperature]}>
+      <View style={[styles.container, styles.section, sectionTemperature]}>
         <View style={styles.sectionInner}>
           <Text style={styles.sectionText}>
             {temperature}&#176;c and {weatherType.toLowerCase()} right now
@@ -28,7 +31,9 @@ export default class ColorScreen extends Component {
         />
         <Button 
           title="No"
-          onPress={() => this.props.navigation.navigate('MultipleColorScreen')} 
+            onPress={() => onClick()}
+          // onPress={() => this.props.navigation.navigate('MultipleColorScreen')} 
+          // onPress={() => onClick()}
         />
       </View>
     )

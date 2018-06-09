@@ -77,7 +77,10 @@ class ClimateScreen extends Component {
   }
 
   noLinkClicked() {
-    this.props.noClicked();
+    alert('no link clickeddddd');
+    // this will call a saga. Which in turn will call a new page 
+    // this.props.noClicked(); 
+    this.props.navigation.navigate('MultipleColorScreen')
   }
   
   render() {
@@ -108,10 +111,11 @@ class ClimateScreen extends Component {
                       {
                         i === 0 ?
                         <TouchableHighlight
-                          style={[styles.section, sectionClass, sectionTemperature]}
+                          style={[sectionClass, sectionTemperature]}
                           onPress={() => this.props.navigation.navigate('Color', { 
                             temperature: updatedTemperature,
-                            weatherType: weatherType
+                            weatherType: weatherType,
+                            onClick: this.noLinkClicked
                           })}
                         >
                           <View style={styles.sectionInner} key={i}>
