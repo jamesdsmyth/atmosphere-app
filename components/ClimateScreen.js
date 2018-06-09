@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Button } from 'react-native';
+import { View, Text, TouchableHighlight } from 'react-native';
 import WeatherSvg from './WeatherSvg';
 import styles from '../assets/styles/styles';
 
@@ -92,28 +92,27 @@ export default class ClimateScreen extends Component {
       
             // deciding on the section classes
             let sectionClass = i === 0 ? styles.sectionNow : styles.sectionLater;
-      
-            return  <View
+
+            return <View
                       style={[styles.section, sectionClass, sectionTemperature]}
                       key={i}
                     >
                       {
                         i === 0 ?
-                        <View>
+                        <TouchableHighlight
+                          style={[styles.section, sectionClass, sectionTemperature]}
+                          onPress={() => this.props.navigation.navigate('Color', { 
+                            temperature: updatedTemperature,
+                            weatherType: weatherType
+                          })}
+                        >
                           <View style={styles.sectionInner} key={i}>
                             <Text style={styles.sectionText} key={i}>
                               {temperature}&#176;c and {weatherType.toLowerCase()} right now
                             </Text>
                             <WeatherSvg weatherType={weatherType} />
                           </View>
-                          <Button
-                            title="View more colors"
-                            onPress={() => this.props.navigation.navigate('Details', { 
-                              temperature: updatedTemperature,
-                              weatherType: weatherType
-                            })}
-                          />
-                        </View>
+                        </TouchableHighlight>
                         :
                         <View style={styles.sectionInner} key={i}>
                           <Text style={styles.sectionText} key={i}>
