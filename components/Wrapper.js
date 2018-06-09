@@ -31,9 +31,6 @@ class Wrapper extends Component {
   }
 
   render() {
-
-    console.log('wrapper props', this.props);
-
     const appState = this.props.appState;
     const apiError = appState.error;
     const weatherArray = appState.weather != false && appState.weather;

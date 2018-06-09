@@ -3,31 +3,18 @@ import { Text, View, Button } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
 import { Provider } from 'react-redux';
 
-import styles from './assets/styles/styles';
 import Wrapper from './components/Wrapper';
+import CompareColorScreen from './components/CompareColorScreen';
 
 import store from './reducers/allReducers';
-
-class HomeScreen extends React.Component {
-  render() {
-    return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Home Screen</Text>
-        <Button
-          title="Go to Details"
-          onPress={() => this.props.navigation.navigate('Details')}
-        />
-      </View>
-    );
-  }
-}
 
 class DetailsScreen extends React.Component {
   render() {
     const { navigation } = this.props;
+    const temp = navigation.getParam('temperature');
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Details Screen</Text>
+        <Text>Details Screen and the temperature is {temp}</Text>
       </View>
     );
   }
@@ -36,7 +23,7 @@ class DetailsScreen extends React.Component {
 const RootStack = createStackNavigator(
   {
     Home: Wrapper,
-    Details: DetailsScreen,
+    Details: CompareColorScreen,
   },
   {
     initialRouteName: 'Home',

@@ -1,23 +1,12 @@
 import React, { Component } from 'react';
 import { View, Text, Button } from 'react-native';
-import { createStackNavigator } from 'react-navigation';
 import WeatherSvg from './WeatherSvg';
 import styles from '../assets/styles/styles';
-
-//
-// ClimateScreen contains 2 sections (ClimateList, CompareColorList)
-// Only one is shown at a time depending on the actions of the user.
-// openColor, closeColor are both functions and passed to ClimateList
-// Clicking either of these functions will animate both sections to show
-// either one or the other.
-//
 
 export default class ClimateScreen extends Component {
 
   constructor(props) {
     super(props);
-
-    console.log(props);
 
     this.state = {
       climateList: true,
@@ -43,7 +32,6 @@ export default class ClimateScreen extends Component {
     this.closeColor = this.closeColor.bind(this);
     this.createCompareColorListColors = this.createCompareColorListColors.bind(this);
     this.onClickColor = this.onClickColor.bind(this);
-    
   }
   
   openColor() {
@@ -88,7 +76,6 @@ export default class ClimateScreen extends Component {
   
   render() {
 
-    console.log(this.props);
     return (
       <View>
       {
@@ -119,8 +106,10 @@ export default class ClimateScreen extends Component {
                             <WeatherSvg weatherType={x.weather[0].main} />
                           </View>
                           <Button
-                            title="Go to Details"
-                            onPress={() => this.props.navigation.navigate('Details')}
+                            title="View more colors"
+                            onPress={() => this.props.navigation.navigate('Details', { 
+                              temperature: temperature
+                            })}
                           />
                         </View>
                         :
