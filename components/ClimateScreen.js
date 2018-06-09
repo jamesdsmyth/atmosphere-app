@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { View, Text, TouchableHighlight } from 'react-native';
 import WeatherSvg from './WeatherSvg';
 import styles from '../assets/styles/styles';
 
-export default class ClimateScreen extends Component {
+class ClimateScreen extends Component {
 
   constructor(props) {
     super(props);
@@ -32,6 +33,7 @@ export default class ClimateScreen extends Component {
     this.closeColor = this.closeColor.bind(this);
     this.createCompareColorListColors = this.createCompareColorListColors.bind(this);
     this.onClickColor = this.onClickColor.bind(this);
+    this.noLinkClicked = this.noLinkClicked.bind(this);
   }
   
   openColor() {
@@ -73,13 +75,19 @@ export default class ClimateScreen extends Component {
       darkerColor: darker
     });
   }
+
+  noLinkClicked() {
+    this.props.noClicked();
+  }
   
   render() {
+
+    const { weather } = this.props.weather;
 
     return (
       <View>
       {
-        this.props.weather.list.map((x, i) => {
+        weather.list.map((x, i) => {
 
           while(i < 6) {
             const temperature = Math.round(x.main.temp - 273.15);
@@ -129,3 +137,17 @@ export default class ClimateScreen extends Component {
     )
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    weather: state
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    noClicked: () => dispatch({ type: "NO_CLICKED" }) // dummy saga
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ClimateScreen);

@@ -22,10 +22,14 @@ export default class ColorScreen extends Component {
         <Text style={styles.sectionText}>
           Does this color match how it feels outside?
         </Text>
-        <Button title="Yes" />
         <Button 
-          title="No" 
-          onPress={() => this.props.navigation.navigate('MultipleColorScreen')} />
+          title="Yes"
+          onPress={() => this.props.navigation.goBack()}
+        />
+        <Button 
+          title="No"
+          onPress={() => this.props.navigation.navigate('MultipleColorScreen')} 
+        />
       </View>
     )
   }

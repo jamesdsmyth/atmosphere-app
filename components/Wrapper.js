@@ -3,9 +3,9 @@ import { ScrollView, RefreshControl } from 'react-native';
 import { connect } from 'react-redux';
 import styles from '../assets/styles/styles';
 
-import ErrorScreen from './ErrorScreen';
-import FetchingScreen from './FetchingScreen';
-import ClimateScreen from './ClimateScreen';
+import ErrorScreen from '../components/ErrorScreen';
+import FetchingScreen from '../components/FetchingScreen';
+import ClimateScreen from '../components/ClimateScreen';
 
 
 class Wrapper extends Component {

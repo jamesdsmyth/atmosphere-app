@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import { Text, View, Button } from 'react-native';
+import React from 'react';
 import { createStackNavigator } from 'react-navigation';
 import { Provider } from 'react-redux';
 

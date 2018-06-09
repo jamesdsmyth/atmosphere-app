@@ -1,6 +1,5 @@
-import { take, call, all, put, dispatch, request } from 'redux-saga/effects';
+import { takeLatest, call, all, put, dispatch, request } from 'redux-saga/effects';
 import axios from 'axios';
-import { RotationGestureHandler } from 'react-native-gesture-handler';
 
 // promise that will return the geolocation of the user
 const getUserLocation = () => new Promise((resolve, reject) => {
@@ -34,14 +33,22 @@ function* getGeolocation() {
   } 
 }
 
-// our watcher saga
+function* noClick() {
+  console.loh('no being called');
+}
+
+// this is called when API_CALL_REQUEST is dispatched
 export function* watchCreateWeather() {
   yield getGeolocation();
 }
 
+// no in color click
+export function* watchNoClick() {
+  yield noClick();
+}
+
 // single entry point to start all our sagas at once
 export default function* rootSaga() {
-  yield all([
-    watchCreateWeather()
-  ])
+  yield takeLatest("API_CALL_REQUEST", watchCreateWeather);
+  yield takeLatest("NO_CLICKED", watchNoClick);
 }
