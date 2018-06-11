@@ -29,36 +29,8 @@ class ClimateScreen extends Component {
       }
     }
 
-    this.openColor = this.openColor.bind(this);
-    this.closeColor = this.closeColor.bind(this);
     this.createCompareColorListColors = this.createCompareColorListColors.bind(this);
-    this.onClickColor = this.onClickColor.bind(this);
-    this.noLinkClicked = this.noLinkClicked.bind(this);
-  }
-  
-  openColor() {
-
-    // need to get the color clicked
-
-    // need to set currentColor here.
-    this.setState({
-      climateList: false,
-      compareColorList: true
-    });
-
-    this.createCompareColorListColors();
-  }
-
-  closeColor() {
-    this.setState({
-      climateList: true,
-      compareColorList: false
-    });
-  }
-
-  onClickColor(color) {
-    console.log(color);
-    alert('color clicked');
+    this.showMoreColors = this.showMoreColors.bind(this);
   }
 
   createCompareColorListColors() {
@@ -76,10 +48,11 @@ class ClimateScreen extends Component {
     });
   }
 
-  noLinkClicked() {
-    alert('no link clickeddddd');
-    // this will call a saga. Which in turn will call a new page 
-    // this.props.noClicked(); 
+  // when a user clicks on 'no' they will be taken to a new screen 
+  // displaying more colors. Here we are dispatching the API_CALL_REQUEST_COLORS
+  // and navigating to the MultipleColorScreen screen
+  showMoreColors() {
+    this.props.bbb(); 
     this.props.navigation.navigate('MultipleColorScreen')
   }
   
@@ -115,7 +88,7 @@ class ClimateScreen extends Component {
                           onPress={() => this.props.navigation.navigate('Color', { 
                             temperature: updatedTemperature,
                             weatherType: weatherType,
-                            onClick: this.noLinkClicked
+                            onClick: this.showMoreColors
                           })}
                         >
                           <View style={styles.sectionInner} key={i}>
@@ -150,7 +123,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    noClicked: () => dispatch({ type: "NO_CLICKED" }) // dummy saga
+    bbb: () => dispatch({ type: 'API_CALL_REQUEST_COLORS' })
   }
 }
 

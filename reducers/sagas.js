@@ -34,7 +34,8 @@ function* getGeolocation() {
 }
 
 function* noClick() {
-  console.loh('no being called');
+  console.log('no being called');
+  alert('NOOOOOO');
 }
 
 // this is called when API_CALL_REQUEST is dispatched
@@ -49,6 +50,6 @@ export function* watchNoClick() {
 
 // single entry point to start all our sagas at once
 export default function* rootSaga() {
-  yield takeLatest("API_CALL_REQUEST", watchCreateWeather);
-  yield takeLatest("NO_CLICKED", watchNoClick);
+  yield takeLatest('API_CALL_REQUEST', watchCreateWeather);
+  yield takeLatest('API_CALL_REQUEST_COLORS', watchNoClick);
 }

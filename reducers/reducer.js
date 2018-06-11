@@ -4,7 +4,7 @@ export function reducer(state = {} , action) {
 
   switch (action.type) {
 
-    case ' NO_CLICKED':
+    case ' API_CALL_REQUEST_COLORS':
       return { 
         ...state, 
         fetching: true, 
