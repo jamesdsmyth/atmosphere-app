@@ -9,9 +9,21 @@ export default class MultipleColorsScreen extends Component {
     console.log('inside multiple', navigation);
     return (
       <View style={styles.container}>
-        <Text>
-          This page should display 3 new colors
-        </Text>
+        <View style={styles.sectionThird}>
+          <Text>
+            This page should display 3 new colors
+          </Text>
+        </View>
+        <View style={styles.sectionThird}>
+          <Text>
+            This page should display 3 new colors
+          </Text>
+        </View>
+        <View style={styles.sectionThird}>
+          <Text>
+            This page should display 3 new colors
+          </Text>
+        </View>
       </View>
     )
   }

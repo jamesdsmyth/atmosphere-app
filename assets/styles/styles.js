@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 
-  // CompareColorList component
+  // MultipleColorsScreen component
   sectionThird: {
     flex: 3
   },
