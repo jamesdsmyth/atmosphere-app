@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 
 import Wrapper from './components/Wrapper';
 import ColorScreen from './components/ColorScreen';
-import MultipleColorScreen from './components/MultipleColorsScreen';
+import MultipleColorScreen from './components/MultipleColorScreen';
 
 import store from './reducers/allReducers';
 
@@ -12,7 +12,7 @@ const RootStack = createStackNavigator(
   {
     Home: Wrapper,
     Color: ColorScreen,
-    MultipleColorScreen: MultipleColorScreen,
+    MultipleColorScreen: MultipleColorScreen
   },
   {
     initialRouteName: 'Home',

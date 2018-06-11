@@ -7,8 +7,6 @@ export default class ColorScreen extends Component {
   render() {
 
     const { navigation } = this.props;
-
-    console.log('the props passsed to the color screen is', navigation);
     const temperature = navigation.getParam('temperature');
     const weatherType = navigation.getParam('weatherType');
     const onClick = navigation.getParam('onClick');
@@ -25,15 +23,13 @@ export default class ColorScreen extends Component {
         <Text style={styles.sectionText}>
           Does this color match how it feels outside?
         </Text>
-        <Button 
+        <Button
           title="Yes"
           onPress={() => this.props.navigation.goBack()}
         />
-        <Button 
+        <Button
           title="No"
             onPress={() => onClick()}
-          // onPress={() => this.props.navigation.navigate('MultipleColorScreen')} 
-          // onPress={() => onClick()}
         />
       </View>
     )

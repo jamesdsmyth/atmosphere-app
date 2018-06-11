@@ -34,7 +34,7 @@ function* getGeolocation() {
 }
 
 function* getColors() {
-  alert('NOOOOOO');
+  
 }
 
 // this is called when API_CALL_REQUEST is dispatched
