@@ -8,3 +8,4 @@ Prompt asks if the current color is suitable.
 
   Saga testing
   Set up a load of click events that dispatch actions where we can test sagas
+  Firebase needs to be added here
