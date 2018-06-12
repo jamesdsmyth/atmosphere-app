@@ -64,12 +64,19 @@ export default class MultipleColorsScreen extends Component {
 
   positionSquare() {
     // here we need to position the square in the correct RGB position.
+    // so depending on the RGB values being passed through,
+    // [234, 94, 123]. 
+    // 812H 375W.
+    // const b = (812*812) + (375*375);
+    // console.log(Math.sqrt(b)); // 894
+    // W H then the diagonal value of the screen. So 
+
   }
 
   updateBackgroundColor() {
     const roundX = this.state.pan.x;
     const roundY = this.state.pan.y;
-    console.log(roundX, roundY, this.state.height, this.state.width);
+    // console.log(roundX, roundY, this.state.height, this.state.width);
 
 
 
