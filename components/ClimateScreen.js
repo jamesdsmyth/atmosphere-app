@@ -52,7 +52,7 @@ class ClimateScreen extends Component {
   // displaying more colors. Here we are dispatching the API_CALL_REQUEST_COLORS
   // and navigating to the MultipleColorScreen screen
   showMoreColors() {
-    this.props.bbb(); 
+    this.props.showMoreColorsDispatch(); 
     this.props.navigation.navigate('MultipleColorScreen')
   }
   
@@ -123,7 +123,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    bbb: () => dispatch({ type: 'API_CALL_REQUEST_COLORS' })
+    showMoreColorsDispatch: () => dispatch({ type: 'API_CALL_REQUEST_COLORS' })
   }
 }
 

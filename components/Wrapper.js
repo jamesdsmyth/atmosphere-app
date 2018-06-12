@@ -27,7 +27,7 @@ class Wrapper extends Component {
   }
 
   componentDidMount() {
-    this.props.onRequestWeather();
+    this.props.onRequestWeatherDispatch();
   }
 
   render() {
@@ -54,7 +54,7 @@ class Wrapper extends Component {
         refreshControl={
           <RefreshControl
             refreshing={this.state.refreshing}
-            onRefresh={this.props.onRequestWeather}
+            onRefresh={this.props.onRequestWeatherDispatch}
           />
         }
         contentContainerStyle={styles.container}
@@ -73,7 +73,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onRequestWeather: () => dispatch({ type: "API_CALL_REQUEST" })
+    onRequestWeatherDispatch: () => dispatch({ type: "API_CALL_REQUEST" })
   }
 }
 
