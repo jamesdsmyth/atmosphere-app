@@ -9,43 +9,8 @@ class ClimateScreen extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      climateList: true,
-      compareColorList: false,
-      currentColor: {
-        r: 201,
-        g: 218,
-        b: 85
-      },
-      lighterColor: {
-        r: 201,
-        g: 218,
-        b: 85
-      },
-      darkerColor: {
-        r: 201,
-        g: 218,
-        b: 85
-      }
-    }
-
-    this.createCompareColorListColors = this.createCompareColorListColors.bind(this);
+    this.state = {}
     this.showMoreColors = this.showMoreColors.bind(this);
-  }
-
-  createCompareColorListColors() {
-    let color = this.state.currentColor;
-
-    let lighter = Object.assign({}, color);
-    lighter.r = lighter.r - 30;
-
-    let darker = Object.assign({}, color);
-    darker.r = darker.r + 30;
-
-    this.setState({
-      lighterColor: lighter,
-      darkerColor: darker
-    });
   }
 
   // when a user clicks on 'no' they will be taken to a new screen 
@@ -53,7 +18,9 @@ class ClimateScreen extends Component {
   // and navigating to the MultipleColorScreen screen
   showMoreColors() {
     this.props.showMoreColorsDispatch(); 
-    this.props.navigation.navigate('MultipleColorScreen')
+    this.props.navigation.navigate('MultipleColorScreen', {
+      selectedColor: [234, 94, 123]
+    });
   }
   
   render() {
