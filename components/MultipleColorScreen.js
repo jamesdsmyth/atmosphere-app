@@ -89,11 +89,12 @@ export default class MultipleColorsScreen extends Component {
     const squarePosH = pixelH * this.state.selectedColor[1];
     console.log('pixel height is -', this.state.height, pixelH);
     
-    const pixelDiagonal = Math.sqrt((this.state.height*this.state.height) + (this.state.width*this.state.width));
-    console.log('pixel diagonal is -', pixelDiagonal);
+    // const pixelDiagonal = Math.sqrt((this.state.height*this.state.height) + (this.state.width*this.state.width));
+    // console.log('pixel diagonal is -', pixelDiagonal);
 
 
-
+    // this now has positioned the square on the screen.
+    // we now will only calculate the diagonal when we need to change thw background color
     this.state.pan.setOffset({x: squarePosW, y: squarePosH});
 
   }
