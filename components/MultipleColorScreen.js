@@ -18,6 +18,11 @@ export default class MultipleColorsScreen extends Component {
     this.updateBackgroundColor = this.updateBackgroundColor.bind(this);
   }
 
+  // when the component mounts we can position the correct location of the square
+  componentDidMount() {
+    this.positionSquare();
+  }
+
   componentWillMount() {
     this._panResponder = PanResponder.create({
       onMoveShouldSetResponderCapture: () => true,
@@ -71,6 +76,26 @@ export default class MultipleColorsScreen extends Component {
     // console.log(Math.sqrt(b)); // 894
     // W H then the diagonal value of the screen. So 
 
+    // this.state.pan.setOffset({x: this.state.selectedColor[0], y: this.state.selectedColor[1]});
+    // console.log(this.state.selectedColor[0], this.state.selectedColor[1], this.state.selectedColor[2]);
+
+    // setting position of square on the grid
+
+    const pixelW = this.state.width / 255;
+    const squarePosW = pixelW * this.state.selectedColor[0];
+    console.log('pixel width is -', this.state.width, pixelW);
+
+    const pixelH = this.state.height / 255;
+    const squarePosH = pixelH * this.state.selectedColor[1];
+    console.log('pixel height is -', this.state.height, pixelH);
+    
+    const pixelDiagonal = Math.sqrt((this.state.height*this.state.height) + (this.state.width*this.state.width));
+    console.log('pixel diagonal is -', pixelDiagonal);
+
+
+
+    this.state.pan.setOffset({x: squarePosW, y: squarePosH});
+
   }
 
   updateBackgroundColor() {
@@ -92,6 +117,8 @@ export default class MultipleColorsScreen extends Component {
 
     // Calculate the x and y transform from the pan value
     let [translateX, translateY] = [pan.x, pan.y];
+
+    console.log('passing in is', translateX, translateY)
 
     let rotate = '0deg';
 
