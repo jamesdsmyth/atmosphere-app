@@ -96,20 +96,26 @@ export default class MultipleColorsScreen extends Component {
     // this now has positioned the square on the screen.
     // we now will only calculate the diagonal when we need to change thw background color
     this.state.pan.setOffset({x: squarePosW, y: squarePosH});
-
   }
 
+  // getting the correct RGB values using the position of the square
   updateBackgroundColor() {
     const roundX = this.state.pan.x;
     const roundY = this.state.pan.y;
-    // console.log(roundX, roundY, this.state.height, this.state.width);
+    let width = Math.round(roundX._value);
+    let height = Math.round(roundY._value);
+    const square = (width*width) + (height*height);
+    const diagonalRough = Math.sqrt(square);
+    let diagonal = Math.round(diagonalRough);
 
-
-
-    // RGB COLOR PICKER CREATION.
-    // this.state.selectedColor. So now we have the actual color.
-    // first lets set the background color of the container.
-
+    width = width < 0 ? 0 : width;
+    height = height < 0 ? 0 : height;
+    diagonal = diagonal < 0 ? 0 : diagonal;
+    
+    const arr = [width, height, diagonal];
+    this.setState({
+      selectedColor: arr
+    });
   }
 
   render() {
@@ -118,13 +124,12 @@ export default class MultipleColorsScreen extends Component {
 
     // Calculate the x and y transform from the pan value
     let [translateX, translateY] = [pan.x, pan.y];
-
-    console.log('passing in is', translateX, translateY)
-
     let rotate = '0deg';
 
     // Calculate the transform property and set it as a value for our style which we add below to the Animated.View component
     let imageStyle = {transform: [{translateX}, {translateY}, {rotate}, {scale}]};
+
+    console.log('selected color is', this.state.selectedColor);
 
     return (
       <View 
