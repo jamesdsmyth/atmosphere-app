@@ -50,9 +50,10 @@ const styles = StyleSheet.create({
     flex: 3
   },
 
-  backgroundImage: {
-    width: 100,
-    height: 100,
+  colorPicker: {
+    width: 50,
+    height: 50,
+    borderRadius: 50,
     backgroundColor: constants.white
   },
 

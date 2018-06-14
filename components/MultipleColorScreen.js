@@ -14,7 +14,6 @@ export default class MultipleColorsScreen extends Component {
       height: Dimensions.get('window').height
     };
 
-    console.log(this.state.selectedColor);
     this.updateBackgroundColor = this.updateBackgroundColor.bind(this);
   }
 
@@ -24,6 +23,10 @@ export default class MultipleColorsScreen extends Component {
   }
 
   componentWillMount() {
+    this.initPanResponder();
+  }
+
+  initPanResponder() {
     this._panResponder = PanResponder.create({
       onMoveShouldSetResponderCapture: () => true,
       onMoveShouldSetPanResponderCapture: () => true,
@@ -134,8 +137,8 @@ export default class MultipleColorsScreen extends Component {
     return (
       <View 
         style={[styles.section, styles.sectionThird, { 'backgroundColor': `rgb(${this.state.selectedColor[0]}, ${this.state.selectedColor[1]}, ${this.state.selectedColor[2]})`}]}>
-        <Animated.View style={imageStyle} {...this._panResponder.panHandlers}>
-          <Image source={require('../assets/icon.png')} />
+        <Animated.View style={[styles.colorPicker, imageStyle]} {...this._panResponder.panHandlers}>
+          {/* <Image source={require('../assets/icon.png')} /> */}
         </Animated.View>
       </View>
     );
