@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Animated, Image, Dimensions, PanResponder } from 'react-native';
+import { View, Animated, Text, Dimensions, PanResponder } from 'react-native';
 import styles from '../assets/styles/styles';
 
 export default class MultipleColorsScreen extends Component {
@@ -35,6 +35,7 @@ export default class MultipleColorsScreen extends Component {
         // Set the initial value to the current state
         this.state.pan.setOffset({x: this.state.pan.x._value, y: this.state.pan.y._value});
         this.state.pan.setValue({x: 0, y: 0});
+
         // Animated.spring(
         //   this.state.scale,
         //   { toValue: 1.1, friction: 3 }
@@ -49,7 +50,12 @@ export default class MultipleColorsScreen extends Component {
       // ])//,
 
       onPanResponderMove: (e, gestureState) => {
-        // custom logic here
+
+        console.log(e, gestureState);
+
+        // console.log(this.state.pan.x);
+        // console.log(this.state.pan.y);
+
         Animated.event([null, {
           dx: this.state.pan.x,
           dy: this.state.pan.y,
@@ -86,11 +92,11 @@ export default class MultipleColorsScreen extends Component {
 
     const pixelW = this.state.width / 255;
     const squarePosW = pixelW * this.state.selectedColor[0];
-    console.log('pixel width is -', this.state.width, pixelW);
+    // console.log('pixel width is -', this.state.width, pixelW);
 
     const pixelH = this.state.height / 255;
     const squarePosH = pixelH * this.state.selectedColor[1];
-    console.log('pixel height is -', this.state.height, pixelH);
+    // console.log('pixel height is -', this.state.height, pixelH);
     
     // const pixelDiagonal = Math.sqrt((this.state.height*this.state.height) + (this.state.width*this.state.width));
     // console.log('pixel diagonal is -', pixelDiagonal);
@@ -103,13 +109,18 @@ export default class MultipleColorsScreen extends Component {
 
   // getting the correct RGB values using the position of the square
   updateBackgroundColor() {
+
+
     const roundX = this.state.pan.x;
     const roundY = this.state.pan.y;
+
     let width = Math.round(roundX._value);
     let height = Math.round(roundY._value);
     const square = (width*width) + (height*height);
     const diagonalRough = Math.sqrt(square);
     let diagonal = Math.round(diagonalRough);
+
+    // console.log(width, height);
 
     width = width < 0 ? 0 : width;
     height = height < 0 ? 0 : height;
@@ -132,13 +143,13 @@ export default class MultipleColorsScreen extends Component {
     // Calculate the transform property and set it as a value for our style which we add below to the Animated.View component
     let imageStyle = {transform: [{translateX}, {translateY}, {rotate}, {scale}]};
 
-    console.log('selected color is', this.state.selectedColor);
+    // console.log('selected color is', this.state.pan.x);
 
     return (
-      <View 
+      <View
         style={[styles.section, styles.sectionThird, { 'backgroundColor': `rgb(${this.state.selectedColor[0]}, ${this.state.selectedColor[1]}, ${this.state.selectedColor[2]})`}]}>
         <Animated.View style={[styles.colorPicker, imageStyle]} {...this._panResponder.panHandlers}>
-          {/* <Image source={require('../assets/icon.png')} /> */}
+        <Text>{Math.round(this.state.pan.x._value)} {Math.round(this.state.pan.y._value)}</Text>
         </Animated.View>
       </View>
     );
