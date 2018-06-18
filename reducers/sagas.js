@@ -1,4 +1,4 @@
-import { takeLatest, call, all, put, dispatch, request } from 'redux-saga/effects';
+import { takeLatest, call, put } from 'redux-saga/effects';
 import axios from 'axios';
 
 // promise that will return the geolocation of the user
