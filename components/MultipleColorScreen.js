@@ -125,33 +125,21 @@ export default class MultipleColorsScreen extends Component {
 
   // getting the correct RGB values using the position of the square
   updateBackgroundColor() {
-    // got position of the circle.
+
+    // get position of the circle.
     const positionX = this.state.circlePosX;
     const positionY = this.state.circlePosY;
+    const positionD = Math.sqrt((positionX * positionX) + (positionY * positionY)); // diagonal position of the screen rectangle
 
-    // 256.
-    const percentX = 256 / this.state.width;
-    const percentY = 256 / this.state.height;
+    // 255 is the RBG color limits. So we divide 255 by the width, height and diagonal to know what to multiply the position by
+    const fractionX = 255 / this.state.width;
+    const fractionY = 255 / this.state.height;
+    const fractionD = 255 / Math.sqrt((this.state.width * this.state.width) + (this.state.height * this.state.height));
 
-    const r = Math.round(percentX * positionX);
-    const g = Math.round(percentY * positionY);
-
-
-
-
-    const square = (positionX * positionX) + (positionY * positionY);
-    console.log(square);
-    const root = Math.sqrt(square);
-    console.log('the root', root);
-    const partial = 256 / root;
-    console.log('the partial is', partial);
-    const b = Math.round(256 / Math.sqrt(positionX * positionX) + (positionY * positionY));
-
-
-
-
-    
-    console.log(r, g, b);
+    // finally we round multiply the fractions by the position to get a 255 limit value
+    const r = Math.round(fractionX * positionX);
+    const g = Math.round(fractionY * positionY);
+    const b = Math.round(fractionD * positionD);
     
     const arr = [r, g, b];
     this.setState({
