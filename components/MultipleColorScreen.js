@@ -37,25 +37,12 @@ export default class MultipleColorsScreen extends Component {
         // Set the initial value to the current state
         this.state.pan.setOffset({x: this.state.pan.x._value, y: this.state.pan.y._value});
         this.state.pan.setValue({x: 0, y: 0});
-
-        // console.log('grant', gestureState.moveX, gestureState.moveY);
-        // Animated.spring(
-        //   this.state.scale,
-        //   { toValue: 1.1, friction: 3 }
-        // ).start();
-
-        // console.log(this.state.pan.x._value, this.state.pan.y._value);
       },
 
       onPanResponderRelease: (e, gestureState) => {
         // console.log('innnn', gestureState.moveX, gestureState.moveY);
         // this.state.pan.setValue({x: gestureState.moveX, y: gestureState.moveY});
       },
-
-      // When we drag/pan the object, set the delate to the states pan position
-      // onPanResponderMove: Animated.event([
-      //   null, {dx: this.state.pan.x, dy: this.state.pan.y},
-      // ])//,
 
       onPanResponderMove: (e, gestureState) => {
         console.log('grant', gestureState.moveX, gestureState.moveY);
@@ -65,13 +52,6 @@ export default class MultipleColorsScreen extends Component {
           circlePosY: gestureState.moveY
         });
 
-        // console.log(e, gestureState);
-
-        // console.log(gestureState.moveX, gestureState.moveY);
-
-        // console.log(this.state.pan.x);
-        // console.log(this.state.pan.y);
-
         Animated.event([null, {
           dx: this.state.pan.x,
           dy: this.state.pan.y,
@@ -79,16 +59,7 @@ export default class MultipleColorsScreen extends Component {
 
         // now we can call the background color and change it.
         this.updateBackgroundColor();
-      },
-
-      // onPanResponderRelease: (e, {vx, vy}) => {
-        // Flatten the offset to avoid erratic behavior
-        // this.state.pan.flattenOffset();
-        // Animated.spring(
-        //   this.state.scale,
-        //   { toValue: 1, friction: 3 }
-        // ).start();
-      // }
+      }
     });
   }
 
@@ -108,15 +79,9 @@ export default class MultipleColorsScreen extends Component {
 
     const pixelW = this.state.width / 255;
     const squarePosW = pixelW * this.state.selectedColor[0];
-    // console.log('pixel width is -', this.state.width, pixelW);
 
     const pixelH = this.state.height / 255;
     const squarePosH = pixelH * this.state.selectedColor[1];
-    // console.log('pixel height is -', this.state.height, pixelH);
-    
-    // const pixelDiagonal = Math.sqrt((this.state.height*this.state.height) + (this.state.width*this.state.width));
-    // console.log('pixel diagonal is -', pixelDiagonal);
-
 
     // this now has positioned the square on the screen.
     // we now will only calculate the diagonal when we need to change thw background color
@@ -157,8 +122,6 @@ export default class MultipleColorsScreen extends Component {
 
     // Calculate the transform property and set it as a value for our style which we add below to the Animated.View component
     let imageStyle = {transform: [{translateX}, {translateY}, {rotate}, {scale}]};
-
-    // console.log('selected color is', this.state.pan.x);
 
     return (
       <View
