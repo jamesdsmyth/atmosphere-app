@@ -11,7 +11,9 @@ export default class MultipleColorsScreen extends Component {
       scale: new Animated.Value(1),
       selectedColor: this.props.navigation.getParam('selectedColor'),
       width: Dimensions.get('window').width,
-      height: Dimensions.get('window').height
+      height: Dimensions.get('window').height,
+      circlePosX: 0,
+      circlePosY: 0
     };
 
     this.updateBackgroundColor = this.updateBackgroundColor.bind(this);
@@ -36,6 +38,7 @@ export default class MultipleColorsScreen extends Component {
         this.state.pan.setOffset({x: this.state.pan.x._value, y: this.state.pan.y._value});
         this.state.pan.setValue({x: 0, y: 0});
 
+        // console.log('grant', gestureState.moveX, gestureState.moveY);
         // Animated.spring(
         //   this.state.scale,
         //   { toValue: 1.1, friction: 3 }
@@ -44,14 +47,27 @@ export default class MultipleColorsScreen extends Component {
         // console.log(this.state.pan.x._value, this.state.pan.y._value);
       },
 
+      onPanResponderRelease: (e, gestureState) => {
+        // console.log('innnn', gestureState.moveX, gestureState.moveY);
+        // this.state.pan.setValue({x: gestureState.moveX, y: gestureState.moveY});
+      },
+
       // When we drag/pan the object, set the delate to the states pan position
       // onPanResponderMove: Animated.event([
       //   null, {dx: this.state.pan.x, dy: this.state.pan.y},
       // ])//,
 
       onPanResponderMove: (e, gestureState) => {
+        console.log('grant', gestureState.moveX, gestureState.moveY);
 
-        console.log(e, gestureState);
+        this.setState({
+          circlePosX: gestureState.moveX,
+          circlePosY: gestureState.moveY
+        });
+
+        // console.log(e, gestureState);
+
+        // console.log(gestureState.moveX, gestureState.moveY);
 
         // console.log(this.state.pan.x);
         // console.log(this.state.pan.y);
@@ -109,24 +125,35 @@ export default class MultipleColorsScreen extends Component {
 
   // getting the correct RGB values using the position of the square
   updateBackgroundColor() {
+    // got position of the circle.
+    const positionX = this.state.circlePosX;
+    const positionY = this.state.circlePosY;
+
+    // 256.
+    const percentX = 256 / this.state.width;
+    const percentY = 256 / this.state.height;
+
+    const r = Math.round(percentX * positionX);
+    const g = Math.round(percentY * positionY);
 
 
-    const roundX = this.state.pan.x;
-    const roundY = this.state.pan.y;
 
-    let width = Math.round(roundX._value);
-    let height = Math.round(roundY._value);
-    const square = (width*width) + (height*height);
-    const diagonalRough = Math.sqrt(square);
-    let diagonal = Math.round(diagonalRough);
 
-    // console.log(width, height);
+    const square = (positionX * positionX) + (positionY * positionY);
+    console.log(square);
+    const root = Math.sqrt(square);
+    console.log('the root', root);
+    const partial = 256 / root;
+    console.log('the partial is', partial);
+    const b = Math.round(256 / Math.sqrt(positionX * positionX) + (positionY * positionY));
 
-    width = width < 0 ? 0 : width;
-    height = height < 0 ? 0 : height;
-    diagonal = diagonal < 0 ? 0 : diagonal;
+
+
+
     
-    const arr = [width, height, diagonal];
+    console.log(r, g, b);
+    
+    const arr = [r, g, b];
     this.setState({
       selectedColor: arr
     });
@@ -149,7 +176,7 @@ export default class MultipleColorsScreen extends Component {
       <View
         style={[styles.section, styles.sectionThird, { 'backgroundColor': `rgb(${this.state.selectedColor[0]}, ${this.state.selectedColor[1]}, ${this.state.selectedColor[2]})`}]}>
         <Animated.View style={[styles.colorPicker, imageStyle]} {...this._panResponder.panHandlers}>
-        <Text>{Math.round(this.state.pan.x._value)} {Math.round(this.state.pan.y._value)}</Text>
+        <Text>{this.state.selectedColor[0]} {this.state.selectedColor[1]} {this.state.selectedColor[2]}</Text>
         </Animated.View>
       </View>
     );
