@@ -14,7 +14,6 @@ export default class MultipleColorsScreen extends Component {
       },
       scale: new Animated.Value(1),
       selectedColor: this.props.navigation.getParam('selectedColor'),
-      selectedColor: [100, 150, 200],
       width: Dimensions.get('window').width,
       height: Dimensions.get('window').height,
       circle0PosX: 0,
@@ -30,11 +29,6 @@ export default class MultipleColorsScreen extends Component {
     this.updateBackgroundColor = this.updateBackgroundColor.bind(this);
   }
 
-  // when the component mounts we can position the correct location of the square
-  componentDidMount() {
-    // this.positionSquare();
-  }
-
   componentWillMount() {
     for(let i = 0; i < this.state.pans.length; i++) {
 
@@ -48,13 +42,16 @@ export default class MultipleColorsScreen extends Component {
         onPanResponderGrant: (e, gestureState) => {
           selector.setOffset({x: selector.x._value, y: selector.y._value});
           selector.setValue({x: 0, y: 0});
+
+          this.setState({
+            currentPan: i
+          });
         },
 
         onPanResponderMove: (e, gestureState) => {
           this.setState({
             [`circle${i}PosX`]: gestureState.moveX,
             [`circle${i}PosY`]: gestureState.moveY,
-            currentPan: i
           });
   
           Animated.event([null, {
@@ -73,31 +70,6 @@ export default class MultipleColorsScreen extends Component {
     }
   }
 
-  positionSquare() {
-    // here we need to position the square in the correct RGB position.
-    // so depending on the RGB values being passed through,
-    // [234, 94, 123]. 
-    // 812H 375W.
-    // const b = (812*812) + (375*375);
-    // console.log(Math.sqrt(b)); // 894
-    // W H then the diagonal value of the screen. So 
-
-    // this.state.pan.setOffset({x: this.state.selectedColor[0], y: this.state.selectedColor[1]});
-    // console.log(this.state.selectedColor[0], this.state.selectedColor[1], this.state.selectedColor[2]);
-
-    // setting position of square on the grid
-
-    const pixelW = this.state.width / 255;
-    const squarePosW = pixelW * this.state.selectedColor[0];
-
-    const pixelH = this.state.height / 255;
-    const squarePosH = pixelH * this.state.selectedColor[1];
-
-    // this now has positioned the square on the screen.
-    // we now will only calculate the diagonal when we need to change thw background color
-    this.state.pan.one.setOffset({x: 200, y: squarePosH});
-  }
-
   // getting the correct RGB values using the position of the square
   updateBackgroundColor() {
     const colors = 255;
@@ -112,16 +84,21 @@ export default class MultipleColorsScreen extends Component {
   }
 
   render() {
-    // Destructure the value of pan from the state
-    let { pan, scale } = this.state;
+    const { pan, scale } = this.state;
+    // const [translateX, translateY] = [pan[Object.keys(pan)[this.state.currentPan]].x, pan[Object.keys(pan)[this.state.currentPan]].y];
+    const rotate = '0deg';
+    let b = {
+      imageStyle0: {},
+      imageStyle1: {},
+      imageStyle2: {}
+    }
 
-    // Calculate the x and y transform from the pan value
-    // we need to work out which one we are looking at here.
-    let [translateX, translateY] = [pan[Object.keys(pan)[0]].x, pan[Object.keys(pan)[0]].y];
-    let rotate = '0deg';
+    for(let i = 0; i < this.state.pans.length; i++) {
+      const [translateX, translateY] = [pan[Object.keys(pan)[i]].x, pan[Object.keys(pan)[i]].y];
+      b[`imageStyle${i}`] = {transform: [{translateX}, {translateY}, {rotate}, {scale}]};
+    }
 
-    // Calculate the transform property and set it as a value for our style which we add below to the Animated.View component
-    let imageStyle = {transform: [{translateX}, {translateY}, {rotate}, {scale}]};
+    console.log(b);
 
     return (
       <View style={styles.container}>
@@ -132,19 +109,19 @@ export default class MultipleColorsScreen extends Component {
               styles.sectionThird, 
               { 'backgroundColor': `rgb(${this.state.selectedColor[0]}, ${this.state.selectedColor[1]}, ${this.state.selectedColor[2]})`}
             ]}>
-          <Animated.View style={[styles.colorPicker, imageStyle]} {...this.state.pans[0].panHandlers}>
+          <Animated.View style={[styles.colorPicker, b.imageStyle0]} {...this.state.pans[0].panHandlers}>
             <Text>
               0 - {this.state.selectedColor[0]} {this.state.selectedColor[1]} {this.state.selectedColor[2]}
             </Text>
           </Animated.View>
 
-          <Animated.View style={[styles.colorPicker, imageStyle]} {...this.state.pans[1].panHandlers}>
+          <Animated.View style={[styles.colorPicker, b.imageStyle1]} {...this.state.pans[1].panHandlers}>
             <Text>
               1 - {this.state.selectedColor[0]} {this.state.selectedColor[1]} {this.state.selectedColor[2]}
             </Text>
           </Animated.View>
 
-          <Animated.View style={[styles.colorPicker, imageStyle]} {...this.state.pans[2].panHandlers}>
+          <Animated.View style={[styles.colorPicker, b.imageStyle2]} {...this.state.pans[2].panHandlers}>
             <Text>
               2 - {this.state.selectedColor[0]} {this.state.selectedColor[1]} {this.state.selectedColor[2]}
             </Text>
