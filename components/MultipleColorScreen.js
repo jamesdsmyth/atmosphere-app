@@ -17,12 +17,13 @@ export default class MultipleColorsScreen extends Component {
       selectedColor: [100, 150, 200],
       width: Dimensions.get('window').width,
       height: Dimensions.get('window').height,
+      circle0PosX: 0,
+      circle0PosY: 0,
       circle1PosX: 0,
       circle1PosY: 0,
       circle2PosX: 0,
       circle2PosY: 0,
-      circle3PosX: 0,
-      circle3PosY: 0,
+      currentPan: 0,
       pans: [this._panResponder, this._panResponder1, this._panResponder2]
     }
 
@@ -50,10 +51,10 @@ export default class MultipleColorsScreen extends Component {
         },
 
         onPanResponderMove: (e, gestureState) => {
-          console.log(gestureState.moveX, gestureState.moveY);  
           this.setState({
-            circle1PosX: gestureState.moveX,
-            circle1PosY: gestureState.moveY
+            [`circle${i}PosX`]: gestureState.moveX,
+            [`circle${i}PosY`]: gestureState.moveY,
+            currentPan: i
           });
   
           Animated.event([null, {
@@ -99,32 +100,14 @@ export default class MultipleColorsScreen extends Component {
 
   // getting the correct RGB values using the position of the square
   updateBackgroundColor() {
+    const colors = 255;
+    const h = this.state.height;
+    const r = Math.round((colors / h) * this.state.circle0PosY);
+    const g = Math.round((colors / h) * this.state.circle1PosY);
+    const b = Math.round((colors / h) * this.state.circle2PosY);
 
-    // // get position of the circle.
-    // const positionX = this.state.circle1PosX;
-    // const positionY = this.state.circle1PosY;
-    // const positionD = Math.sqrt((positionX * positionX) + (positionY * positionY)); // diagonal position of the screen rectangle
-
-    // // 255 is the RBG color limits. So we divide 255 by the width, height and diagonal to know what to multiply the position by
-    // const fractionX = 255 / this.state.width;
-    // const fractionY = 255 / this.state.height;
-    // const fractionD = 255 / Math.sqrt((this.state.width * this.state.width) + (this.state.height * this.state.height));
-
-    // // finally we round multiply the fractions by the position to get a 255 limit value
-    // const r = Math.round(fractionX * positionX);
-    // const g = Math.round(fractionY * positionY);
-    // const b = Math.round(fractionD * positionD);
-
-    const positionX = Math.round(this.state.circle1PosX);
-    const positionY = Math.round(this.state.circle1PosY);
-
-    const y = Math.round((255 / this.state.height) * this.state.circle1PosY);
-
-    console.log(positionX, y);
-    
-    const arr = [100, 100, y];
     this.setState({
-      selectedColor: arr
+      selectedColor: [r, g, b]
     });
   }
 
@@ -133,6 +116,7 @@ export default class MultipleColorsScreen extends Component {
     let { pan, scale } = this.state;
 
     // Calculate the x and y transform from the pan value
+    // we need to work out which one we are looking at here.
     let [translateX, translateY] = [pan[Object.keys(pan)[0]].x, pan[Object.keys(pan)[0]].y];
     let rotate = '0deg';
 
@@ -142,7 +126,12 @@ export default class MultipleColorsScreen extends Component {
     return (
       <View style={styles.container}>
         <View
-          style={[styles.section, styles.sectionThird, { 'backgroundColor': `rgb(${this.state.selectedColor[0]}, ${this.state.selectedColor[1]}, ${this.state.selectedColor[2]})`}]}>
+          style={
+            [
+              styles.section, 
+              styles.sectionThird, 
+              { 'backgroundColor': `rgb(${this.state.selectedColor[0]}, ${this.state.selectedColor[1]}, ${this.state.selectedColor[2]})`}
+            ]}>
           <Animated.View style={[styles.colorPicker, imageStyle]} {...this.state.pans[0].panHandlers}>
             <Text>
               0 - {this.state.selectedColor[0]} {this.state.selectedColor[1]} {this.state.selectedColor[2]}
