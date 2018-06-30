@@ -14,7 +14,6 @@ export default class MultipleColorsScreen extends Component {
       },
       scale: new Animated.Value(1),
       selectedColor: this.props.navigation.getParam('selectedColor'),
-      width: Dimensions.get('window').width,
       height: Dimensions.get('window').height,
       circle0PosX: 0,
       circle0PosY: 0,
@@ -22,14 +21,17 @@ export default class MultipleColorsScreen extends Component {
       circle1PosY: 0,
       circle2PosX: 0,
       circle2PosY: 0,
-      currentPan: 0,
       pans: [this._panResponder, this._panResponder1, this._panResponder2]
     }
-
-    this.updateBackgroundColor = this.updateBackgroundColor.bind(this);
   }
 
+
   componentWillMount() {
+    this.attachPanHandlerEvents();
+  }
+
+  // using PanResponders built in functions, we will set up all the event listeners here
+  attachPanHandlerEvents() {
     for(let i = 0; i < this.state.pans.length; i++) {
 
       const selector = this.state.pan[Object.keys(this.state.pan)[i]];
@@ -42,10 +44,6 @@ export default class MultipleColorsScreen extends Component {
         onPanResponderGrant: (e, gestureState) => {
           selector.setOffset({x: selector.x._value, y: selector.y._value});
           selector.setValue({x: 0, y: 0});
-
-          this.setState({
-            currentPan: i
-          });
         },
 
         onPanResponderMove: (e, gestureState) => {
@@ -70,7 +68,7 @@ export default class MultipleColorsScreen extends Component {
     }
   }
 
-  // getting the correct RGB values using the position of the square
+  // getting the correct RGB values using the position of each of the circles
   updateBackgroundColor() {
     const colors = 255;
     const h = this.state.height;
@@ -85,7 +83,6 @@ export default class MultipleColorsScreen extends Component {
 
   render() {
     const { pan, scale } = this.state;
-    // const [translateX, translateY] = [pan[Object.keys(pan)[this.state.currentPan]].x, pan[Object.keys(pan)[this.state.currentPan]].y];
     const rotate = '0deg';
     let b = {
       imageStyle0: {},
@@ -93,12 +90,11 @@ export default class MultipleColorsScreen extends Component {
       imageStyle2: {}
     }
 
+    // here we are looping through each pan and getting the translate and translateY for each one
     for(let i = 0; i < this.state.pans.length; i++) {
       const [translateX, translateY] = [pan[Object.keys(pan)[i]].x, pan[Object.keys(pan)[i]].y];
       b[`imageStyle${i}`] = {transform: [{translateX}, {translateY}, {rotate}, {scale}]};
     }
-
-    console.log(b);
 
     return (
       <View style={styles.container}>
@@ -117,7 +113,9 @@ export default class MultipleColorsScreen extends Component {
                 return (
                   <Animated.View style={[styles.colorPicker, b[circleStyle]]} {...this.state.pans[index].panHandlers}>
                     <Text>
-                      {this.state.selectedColor[index]}
+                      {index === 0 && 'R'}
+                      {index === 1 && 'G'}
+                      {index === 2 && 'B'}
                     </Text>
                   </Animated.View>
                 )
