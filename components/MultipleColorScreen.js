@@ -109,23 +109,20 @@ export default class MultipleColorsScreen extends Component {
               styles.sectionThird, 
               { 'backgroundColor': `rgb(${this.state.selectedColor[0]}, ${this.state.selectedColor[1]}, ${this.state.selectedColor[2]})`}
             ]}>
-          <Animated.View style={[styles.colorPicker, b.imageStyle0]} {...this.state.pans[0].panHandlers}>
-            <Text>
-              0 - {this.state.selectedColor[0]} {this.state.selectedColor[1]} {this.state.selectedColor[2]}
-            </Text>
-          </Animated.View>
 
-          <Animated.View style={[styles.colorPicker, b.imageStyle1]} {...this.state.pans[1].panHandlers}>
-            <Text>
-              1 - {this.state.selectedColor[0]} {this.state.selectedColor[1]} {this.state.selectedColor[2]}
-            </Text>
-          </Animated.View>
+            {
+              this.state.pans.map((pan, index) => {
+                const circleStyle = `imageStyle${index}`;
 
-          <Animated.View style={[styles.colorPicker, b.imageStyle2]} {...this.state.pans[2].panHandlers}>
-            <Text>
-              2 - {this.state.selectedColor[0]} {this.state.selectedColor[1]} {this.state.selectedColor[2]}
-            </Text>
-          </Animated.View>
+                return (
+                  <Animated.View style={[styles.colorPicker, b[circleStyle]]} {...this.state.pans[index].panHandlers}>
+                    <Text>
+                      {this.state.selectedColor[index]}
+                    </Text>
+                  </Animated.View>
+                )
+              })
+            }
         </View>
       </View>
     );
