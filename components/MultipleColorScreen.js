@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { View, Animated, Text, Dimensions, PanResponder } from 'react-native';
+import { Header } from 'react-navigation';
 import styles from '../assets/styles/styles';
+
+console.log(Header.HEIGHT);
 
 export default class MultipleColorsScreen extends Component {
   constructor(props) {
@@ -14,7 +17,7 @@ export default class MultipleColorsScreen extends Component {
       },
       scale: new Animated.Value(1),
       selectedColor: this.props.navigation.getParam('selectedColor'),
-      height: Dimensions.get('window').height,
+      height: Dimensions.get('window').height - Header.HEIGHT,
       circle0PosX: 0,
       circle0PosY: 0,
       circle1PosX: 0,
@@ -84,16 +87,16 @@ export default class MultipleColorsScreen extends Component {
   render() {
     const { pan, scale } = this.state;
     const rotate = '0deg';
-    let b = {
-      imageStyle0: {},
-      imageStyle1: {},
-      imageStyle2: {}
+    let circle = {
+      circleStyle0: {},
+      circleStyle1: {},
+      circleStyle2: {}
     }
 
     // here we are looping through each pan and getting the translate and translateY for each one
     for(let i = 0; i < this.state.pans.length; i++) {
       const [translateX, translateY] = [pan[Object.keys(pan)[i]].x, pan[Object.keys(pan)[i]].y];
-      b[`imageStyle${i}`] = {transform: [{translateX}, {translateY}, {rotate}, {scale}]};
+      circle[`circleStyle${i}`] = {transform: [{translateX}, {translateY}, {rotate}, {scale}]};
     }
 
     return (
@@ -108,10 +111,12 @@ export default class MultipleColorsScreen extends Component {
 
             {
               this.state.pans.map((pan, index) => {
-                const circleStyle = `imageStyle${index}`;
+                const circleStyle = `circleStyle${index}`;
 
                 return (
-                  <Animated.View style={[styles.colorPicker, b[circleStyle]]} {...this.state.pans[index].panHandlers}>
+                  <Animated.View 
+                    key={index} 
+                    style={[styles.colorPicker, circle[circleStyle]]} {...this.state.pans[index].panHandlers}>
                     <Text>
                       {index === 0 && 'R'}
                       {index === 1 && 'G'}
