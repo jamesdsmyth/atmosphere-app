@@ -14,7 +14,7 @@ export default class MultipleColorsScreen extends Component {
       height: Dimensions.get('window').height,
       circlePosX: 0,
       circlePosY: 0
-    };
+    }
 
     this.updateBackgroundColor = this.updateBackgroundColor.bind(this);
   }
@@ -46,6 +46,7 @@ export default class MultipleColorsScreen extends Component {
 
       onPanResponderMove: (e, gestureState) => {
         console.log('grant', gestureState.moveX, gestureState.moveY);
+        console.log('dimensionssss', this.state.width * this.state.height);
 
         this.setState({
           circlePosX: gestureState.moveX,
