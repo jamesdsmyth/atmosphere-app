@@ -109,12 +109,10 @@ export default class ColorPicker extends Component {
 
             {
               this.state.pans.map((pan, index) => {
-                const circleStyle = `circleStyle${index}`;
-
                 return (
                   <Animated.View 
                     key={index} 
-                    style={[styles.colorPicker, circle[circleStyle]]} {...this.state.pans[index].panHandlers}>
+                    style={[styles.colorPicker, circle[`circleStyle${index}`]]} {...this.state.pans[index].panHandlers}>
                     <Text>
                       {index === 0 && 'R'}
                       {index === 1 && 'G'}

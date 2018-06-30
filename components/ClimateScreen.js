@@ -15,10 +15,10 @@ class ClimateScreen extends Component {
 
   // when a user clicks on 'no' they will be taken to a new screen 
   // displaying more colors. Here we are dispatching the API_CALL_REQUEST_COLORS
-  // and navigating to the MultipleColorScreen screen
+  // and navigating to the ColorPicker screen
   showMoreColors() {
     this.props.showMoreColorsDispatch(); 
-    this.props.navigation.navigate('MultipleColorScreen', {
+    this.props.navigation.navigate('ColorPicker', {
       selectedColor: [234, 94, 123]
     });
   }

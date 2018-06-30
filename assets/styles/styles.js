@@ -45,16 +45,16 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 
-  // MultipleColorsScreen component
-  sectionThird: {
-    flex: 3
+  // ColorPicker component
+  colorPickerContainer: {
+    flex: 1,
+    width: window.width
   },
-
   colorPicker: {
     width: 50,
     height: 50,
     borderRadius: 50,
-    backgroundColor: constants.white
+    backgroundColor: '#cccccc'//constants.white
   },
 
   section90: {
