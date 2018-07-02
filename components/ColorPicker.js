@@ -44,13 +44,16 @@ export default class ColorPicker extends Component {
         // Initially, set the value of x and y to 0 (the center of the screen)
         onPanResponderGrant: (e, gestureState) => {
           selector.setOffset({x: selector.x._value, y: selector.y._value});
-          selector.setValue({x: 0, y: 0});
+          // selector.setValue({x: 0, y: 0});
         },
 
         onPanResponderMove: (e, gestureState) => {
+
+          // here we are setting the position of the gesture move. This will then re-render the view with the correct
+          //  background color
           this.setState({
-            [`circle${i}PosX`]: selector.x._value,
-            [`circle${i}PosY`]: selector.y._value
+            [`circle${i}PosX`]: gestureState.moveX,
+            [`circle${i}PosY`]: gestureState.moveY
           });
   
           Animated.event([null, {
@@ -122,8 +125,8 @@ export default class ColorPicker extends Component {
                 )
               })
             }
+            <Text>{this.state.bgColor[0]} {this.state.bgColor[1]} {this.state.bgColor[2]}</Text>
         </View>
-        {/* <Text>{this.state.bgColor[0]} {this.state.bgColor[1]} {this.state.bgColor[2]}</Text> */}
       </View>
     );
   }
