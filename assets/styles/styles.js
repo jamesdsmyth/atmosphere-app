@@ -54,7 +54,8 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     borderRadius: 50,
-    backgroundColor: '#cccccc'//constants.white
+    backgroundColor: constants.white,
+    position: 'absolute'
   },
 
   section90: {

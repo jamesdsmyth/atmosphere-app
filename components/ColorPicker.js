@@ -48,7 +48,6 @@ export default class ColorPicker extends Component {
         },
 
         onPanResponderMove: (e, gestureState) => {
-
           // here we are setting the position of the gesture move. This will then re-render the view with the correct
           //  background color
           this.setState({
@@ -91,7 +90,10 @@ export default class ColorPicker extends Component {
     let circle = {
       circleStyle0: {},
       circleStyle1: {},
-      circleStyle2: {}
+      circleStyle2: {},
+      circleTop0: 0,
+      circleTop1: 0,
+      circleTop2: 0
     }
 
     // here we are looping through each pan and getting the translate and translateY for each one
@@ -99,6 +101,9 @@ export default class ColorPicker extends Component {
       const currentPan = pan[Object.keys(pan)[i]];
       const [translateX, translateY] = [currentPan.x, currentPan.y];
       circle[`circleStyle${i}`] = {transform: [{translateX}, {translateY}, {rotate}, {scale}]};
+      circle[`Top${i}`] = translateY;
+
+      console.log(circle)
     }
 
     return (
@@ -112,10 +117,19 @@ export default class ColorPicker extends Component {
 
             {
               this.state.pans.map((pan, index) => {
+
+                const top = circle[`circleTop${index}`]
+
+                console.log(top);
+
                 return (
                   <Animated.View 
                     key={index} 
-                    style={[styles.colorPicker, circle[`circleStyle${index}`]]} {...this.state.pans[index].panHandlers}>
+                    style={[
+                      { 'top': top },
+                      styles.colorPicker,
+                      circle[`circleStyle${index}`]]}
+                      {...this.state.pans[index].panHandlers}>
                     <Text>
                       {index === 0 && 'R'}
                       {index === 1 && 'G'}

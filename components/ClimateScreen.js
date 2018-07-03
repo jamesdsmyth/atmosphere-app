@@ -19,7 +19,7 @@ class ClimateScreen extends Component {
   showMoreColors() {
     this.props.showMoreColorsDispatch(); 
     this.props.navigation.navigate('ColorPicker', {
-      selectedColor: [234, 94, 123]
+      selectedColor: [200, 94, 150]
     });
   }
   
